@@ -1,0 +1,529 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import AppelAction from '../components/AppelAction.astro';
+import { cabinet, domaines } from '../data/cabinet';
+import portrait from '../assets/portrait.jpg';
+
+const description =
+  'Maître Élodie Dutour, avocat au barreau de Paris, intervient en droit de la famille, des personnes et de leur patrimoine : divorce, séparation, enfants, filiation, patrimoine et droit pénal. Cabinet 92 boulevard de Sébastopol, Paris 3e.';
+---
+
+<Base titre="accueil" description={description}>
+  <!-- ================================================== ouverture ====== -->
+  <section class="ouverture">
+    <div class="enveloppe ouverture-grille">
+      <div class="ouverture-texte">
+        <h1>
+          Une séparation, un désaccord sur vos enfants, une convocation.
+          <em>Parlons-en.</em>
+        </h1>
+
+        <p class="ouverture-chapeau">
+          Je suis avocat au barreau de Paris et je consacre mon exercice au
+          droit de la famille, des personnes et de leur patrimoine. Vous
+          m’expliquez votre situation, je vous dis où vous en êtes et ce qui
+          peut être fait.
+        </p>
+
+        <div class="ouverture-actions">
+          <a class="bouton" href="/contact">Prendre rendez-vous</a>
+          <a class="ouverture-tel" href={`tel:${cabinet.telephoneLien}`}>
+            {cabinet.telephone}
+          </a>
+        </div>
+
+        <p class="ouverture-note">
+          Cabinet au 92 boulevard de Sébastopol, Paris 3<sup>e</sup> — sur
+          rendez-vous. Première consultation {cabinet.premiereConsultation}.
+          Aide juridictionnelle acceptée selon votre situation.
+        </p>
+      </div>
+
+      <div class="ouverture-portrait">
+        <Image
+          src={portrait}
+          alt="Maître Élodie Dutour, avocat au barreau de Paris."
+          widths={[420, 640, 900]}
+          sizes="(max-width: 860px) 70vw, 34vw"
+          loading="eager"
+          fetchpriority="high"
+          quality={82}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================== domaines ====== -->
+  <section class="section" aria-labelledby="t-domaines">
+    <div class="enveloppe">
+      <div class="entree-section">
+        <h2 class="titre-section" id="t-domaines">Ce que je traite</h2>
+        <p class="chapeau mesure">
+          Quatre domaines, tous liés à la famille et à ce qu’elle engage :
+          votre couple, vos enfants, votre patrimoine, et votre liberté.
+        </p>
+      </div>
+
+      <ul class="domaines">
+        {
+          domaines.map((d) => (
+            <li class="domaine">
+              <div class="domaine-titre">
+                <h3>
+                  <a href={`/${d.slug}`}>{d.court}</a>
+                </h3>
+              </div>
+              <div class="domaine-corps">
+                <p class="domaine-situation">{d.situation}</p>
+                <p class="domaine-resume">{d.resume}</p>
+                <a class="domaine-lien" href={`/${d.slug}`}>
+                  {d.invitation}
+                  <span class="invisible"> — {d.court.toLowerCase()}</span>
+                </a>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================================================== méthode ====== -->
+  <section class="section section-encre" aria-labelledby="t-methode">
+    <div class="enveloppe methode-grille">
+      <div>
+        <h2 class="titre-section" id="t-methode">Comment je travaille</h2>
+      </div>
+      <div class="methode-texte">
+        <p>
+          Un dossier de droit de la famille n’est jamais seulement un dossier
+          juridique. Derrière chaque procédure il y a une maison à quitter, des
+          enfants à rassurer, un budget à refaire. J’en tiens compte.
+        </p>
+        <p>
+          Vous saurez à chaque étape où en est votre affaire, ce que je fais et
+          ce que cela va coûter. Vous obtiendrez une réponse à vos questions
+          dans des délais raisonnables, et une position claire plutôt qu’une
+          réponse de principe — y compris lorsque cette position est qu’il vaut
+          mieux négocier que plaider.
+        </p>
+        <p>
+          J’exerce seule, ce qui veut dire que l’avocat que vous rencontrez au
+          premier rendez-vous est celui qui plaidera votre dossier.
+        </p>
+        <p class="methode-lien">
+          <a href="/le-cabinet">Mon parcours et mon cabinet</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== repères ====== -->
+  <section class="section" aria-labelledby="t-reperes">
+    <div class="enveloppe">
+      <h2 class="titre-section mesure" id="t-reperes">
+        Ce qu’il est utile de savoir avant d’appeler
+      </h2>
+
+      <dl class="reperes">
+        <div class="repere">
+          <dt>Les honoraires sont fixés à l’avance</dt>
+          <dd>
+            Forfait ou temps passé selon le dossier, toujours par une
+            convention d’honoraires signée avant que je commence. La première
+            consultation au cabinet est facturée {cabinet.premiereConsultation}.
+            <a href="/honoraires">Le détail des honoraires</a>
+          </dd>
+        </div>
+        <div class="repere">
+          <dt>L’aide juridictionnelle est acceptée</dt>
+          <dd>
+            Selon vos ressources et votre situation. Dites-le moi dès le
+            premier appel : cela change la manière dont nous organisons le
+            dossier.
+          </dd>
+        </div>
+        <div class="repere">
+          <dt>J’interviens partout en France</dt>
+          <dd>
+            Devant les juridictions de la région parisienne et sur l’ensemble
+            du territoire français.
+          </dd>
+        </div>
+        <div class="repere">
+          <dt>Ce que vous me dites reste entre nous</dt>
+          <dd>
+            Le secret professionnel de l’avocat est absolu et couvre tout ce
+            que vous me confiez, dès le premier échange, y compris si vous ne
+            me confiez finalement pas le dossier.
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <AppelAction />
+</Base>
+
+<style>
+  /* ==================================================== ouverture ====== */
+
+  .ouverture {
+    background: var(--encre);
+    color: var(--craie);
+    position: relative;
+    overflow: hidden;
+    /* Le voile reprend exactement le fond du portrait : la photo s'y fond. */
+    background-image: radial-gradient(
+      62% 78% at 78% 62%,
+      var(--encre-profond) 0%,
+      rgba(10, 17, 20, 0.72) 42%,
+      rgba(10, 17, 20, 0) 74%
+    );
+  }
+
+  .ouverture-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+    align-items: end;
+    gap: 2rem;
+    padding-top: clamp(3.25rem, 7vw, 6rem);
+  }
+
+  .ouverture-texte {
+    padding-bottom: clamp(3.5rem, 7vw, 6.5rem);
+    max-width: 33rem;
+  }
+
+  .ouverture h1 {
+    font-size: var(--t-6);
+    font-weight: 300;
+    line-height: 1.07;
+    letter-spacing: -0.028em;
+    margin: 0 0 1.5rem;
+  }
+
+  /* « Parlons-en. » — la seule inflexion du titre, et le sens de la page */
+  .ouverture h1 em {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 0.22em;
+  }
+
+  .ouverture-chapeau {
+    font-size: var(--t-1);
+    line-height: 1.66;
+    color: rgba(239, 241, 236, 0.84);
+    margin-bottom: 2rem;
+    max-width: 30rem;
+  }
+
+  .ouverture-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.1rem 1.75rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .ouverture-tel {
+    font-family: var(--sans);
+    font-size: 1.22rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    color: var(--craie);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(239, 241, 236, 0.4);
+    padding-bottom: 0.15rem;
+    white-space: nowrap;
+  }
+
+  .ouverture-tel:hover {
+    color: #fff;
+    border-bottom-color: currentColor;
+  }
+
+  .ouverture-note {
+    font-family: var(--sans);
+    font-size: 0.87rem;
+    line-height: 1.68;
+    color: rgba(239, 241, 236, 0.58);
+    max-width: 27rem;
+    margin: 0;
+  }
+
+  .ouverture-portrait {
+    align-self: end;
+    margin-bottom: -1px;
+  }
+
+  .ouverture-portrait :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Les bords se dissolvent sur trois côtés, le bas affleure la section :
+       aucune arête, la photo semble posée à même la page. */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 26%,
+        #000 74%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 34%, #000 100%);
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 26%,
+        #000 74%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 34%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  /* Une seule séquence orchestrée, au chargement. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ouverture-texte > * {
+      animation: monte 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+    }
+    .ouverture h1 {
+      animation-delay: 0.05s;
+    }
+    .ouverture-chapeau {
+      animation-delay: 0.18s;
+    }
+    .ouverture-actions {
+      animation-delay: 0.28s;
+    }
+    .ouverture-note {
+      animation-delay: 0.36s;
+    }
+    .ouverture-portrait {
+      animation: parait 1.2s ease 0.1s backwards;
+    }
+  }
+
+  @keyframes monte {
+    from {
+      opacity: 0;
+      transform: translateY(0.85rem);
+    }
+  }
+
+  @keyframes parait {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .ouverture-grille {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .ouverture-texte {
+      order: 2;
+      padding-bottom: clamp(3rem, 8vw, 4rem);
+      max-width: none;
+    }
+
+    .ouverture-portrait {
+      order: 1;
+      width: min(68%, 20rem);
+      margin-inline: auto -1rem;
+      margin-bottom: -2.5rem;
+    }
+
+    /* Le texte passe sous la photo : le bas doit se dissoudre aussi. */
+    .ouverture-portrait :global(img) {
+      -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          #000 22%,
+          #000 82%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 30%,
+          #000 72%,
+          transparent 99%
+        );
+      mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          #000 22%,
+          #000 82%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 30%,
+          #000 72%,
+          transparent 99%
+        );
+    }
+  }
+
+  /* ===================================================== domaines ====== */
+
+  .entree-section {
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .entree-section .chapeau {
+    margin: 1rem 0 0;
+  }
+
+  /* Table des matières, pas une grille de cartes. */
+  .domaines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: var(--rule);
+  }
+
+  .domaine {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: 1rem 3rem;
+    padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+    border-bottom: var(--rule);
+  }
+
+  .domaine-titre h3 {
+    font-size: var(--t-3);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  .domaine-titre a {
+    color: var(--encre);
+    text-decoration: none;
+  }
+
+  .domaine-titre a:hover {
+    color: var(--bordeaux);
+  }
+
+  .domaine-corps {
+    max-width: 38rem;
+  }
+
+  .domaine-situation {
+    font-size: var(--t-1);
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+
+  .domaine-resume {
+    color: var(--grafite);
+    font-size: 1.03rem;
+    line-height: 1.66;
+    margin-bottom: 0.9rem;
+  }
+
+  .domaine-lien {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(123, 45, 62, 0.4);
+    padding-bottom: 0.12rem;
+  }
+
+  .domaine-lien:hover {
+    border-bottom-color: currentColor;
+  }
+
+  @media (max-width: 700px) {
+    .domaine {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  /* ====================================================== méthode ====== */
+
+  .methode-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: 1.5rem 3rem;
+  }
+
+  .methode-texte {
+    max-width: var(--mesure-large);
+    font-size: var(--t-1);
+    line-height: 1.75;
+    color: rgba(239, 241, 236, 0.86);
+  }
+
+  .methode-texte p:last-child {
+    margin-bottom: 0;
+  }
+
+  .methode-lien {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    margin-top: 1.75rem !important;
+  }
+
+  @media (max-width: 760px) {
+    .methode-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ====================================================== repères ====== */
+
+  .reperes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 4rem;
+    margin: clamp(2.25rem, 4vw, 3rem) 0 0;
+  }
+
+  .repere dt {
+    font-family: var(--serif);
+    font-size: var(--t-1);
+    font-weight: 600;
+    line-height: 1.34;
+    margin-bottom: 0.55rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--encre);
+  }
+
+  .repere dd {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.68;
+    color: var(--grafite);
+  }
+
+  .repere dd a {
+    display: block;
+    width: fit-content;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-top: 0.6rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(123, 45, 62, 0.4);
+  }
+
+  @media (max-width: 680px) {
+    .reperes {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

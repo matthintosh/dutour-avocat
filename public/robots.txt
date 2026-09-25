@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dutour-avocat.fr/sitemap-index.xml

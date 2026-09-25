@@ -1,0 +1,145 @@
+---
+import DomaineLayout from '../layouts/Domaine.astro';
+import { getDomaine } from '../data/cabinet';
+
+const domaine = getDomaine('enfants-et-filiation');
+
+const description =
+  'Avocat en droit de l’enfant à Paris : autorité parentale, résidence, droit de visite et d’hébergement, pension alimentaire, adoption, filiation, droits des grands-parents. Maître Élodie Dutour.';
+
+const etapes = [
+  {
+    titre: 'Faire le point',
+    texte:
+      'Nous reprenons l’organisation actuelle, ce qui fonctionne et ce qui ne fonctionne plus, et ce que vous demandez précisément. Les dates et les faits comptent : c’est sur eux que le juge se prononcera.',
+  },
+  {
+    titre: 'Chercher l’accord',
+    texte:
+      'Un accord parental homologué par le juge a la même force qu’un jugement, tout en évitant l’affrontement. C’est presque toujours préférable pour l’enfant, et je le recherche en priorité.',
+  },
+  {
+    titre: 'Saisir le juge aux affaires familiales',
+    texte:
+      'À défaut d’accord, je rédige et dépose la requête, en réunissant les pièces qui établissent votre situation : logement, horaires de travail, implication dans le quotidien de l’enfant.',
+  },
+  {
+    titre: 'L’audience',
+    texte:
+      'Vous êtes entendu, votre enfant peut demander à l’être s’il est capable de discernement. Je vous prépare à cette audience pour que rien ne vous y surprenne.',
+  },
+  {
+    titre: 'Après la décision',
+    texte:
+      'La décision s’applique jusqu’à ce qu’un élément nouveau justifie de la revoir : un déménagement, un changement d’emploi, l’entrée au collège. Une révision est toujours possible.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Comment est fixée la pension alimentaire ?',
+    reponse:
+      'La contribution à l’entretien et à l’éducation de l’enfant est calculée en fonction des ressources de chaque parent, du nombre d’enfants et du temps que l’enfant passe chez chacun. Le ministère de la Justice publie une table de référence indicative, mais le juge s’en écarte lorsque la situation le justifie : frais de santé particuliers, scolarité coûteuse, charges de logement inhabituelles.',
+  },
+  {
+    question: 'La résidence alternée est-elle automatique ?',
+    reponse:
+      'Non. Elle est une possibilité parmi d’autres, pas un droit ni une règle par défaut. Le juge décide au regard de l’intérêt de l’enfant : la proximité des domiciles, l’âge de l’enfant, les disponibilités réelles de chaque parent et leur capacité à communiquer entre eux.',
+  },
+  {
+    question: 'Mon enfant peut-il être entendu par le juge ?',
+    reponse:
+      'Oui, s’il est capable de discernement — ce qui s’apprécie au cas par cas plutôt qu’à un âge fixe. L’enfant peut demander à être entendu, et cette demande ne peut lui être refusée. Il ne choisit pas pour autant chez qui il vit : son avis est un élément parmi d’autres, et il n’a pas à porter la responsabilité de la décision.',
+  },
+  {
+    question:
+      'L’autre parent ne respecte pas le droit de visite. Que puis-je faire ?',
+    reponse:
+      'Le non-respect d’une décision fixant la résidence ou le droit de visite constitue le délit de non-représentation d’enfant. Avant d’en arriver là, il faut constituer la preuve des manquements — courriers, messages, constats — et, selon les cas, saisir à nouveau le juge aux affaires familiales ou déposer plainte. Le bon choix dépend de ce que vous cherchez à obtenir.',
+  },
+  {
+    question: 'Quels sont les droits des grands-parents ?',
+    reponse:
+      'L’enfant a le droit d’entretenir des relations personnelles avec ses ascendants, et seul son intérêt peut y faire obstacle. Lorsque les parents s’y opposent, les grands-parents peuvent saisir le juge aux affaires familiales pour obtenir un droit de visite et d’hébergement.',
+  },
+  {
+    question: 'Comment contester ou établir une paternité ?',
+    reponse:
+      'Une action en recherche de paternité ou de maternité permet d’établir un lien de filiation ; une action en contestation permet de le remettre en cause. Ces actions obéissent à des délais stricts, qui varient selon que la possession d’état a duré ou non. Le temps joue ici un rôle décisif : mieux vaut consulter tôt.',
+  },
+];
+---
+
+<DomaineLayout
+  domaine={domaine}
+  description={description}
+  etapes={etapes}
+  etapesIntro="Toute décision concernant un enfant s’apprécie au regard d’un seul critère : son intérêt. Voici comment la procédure s’organise autour de lui."
+  faq={faq}
+>
+  <h2>L’autorité parentale et l’organisation du quotidien</h2>
+
+  <p>
+    L’autorité parentale reste conjointe après une séparation, sauf décision
+    contraire du juge. Chacun des parents continue donc de décider avec l’autre
+    des choix importants — l’école, la santé, un déménagement, un voyage à
+    l’étranger. Ce qui se fixe, c’est l’organisation concrète :
+  </p>
+
+  <ul>
+    <li>
+      <strong>La résidence habituelle</strong> — chez l’un des parents, ou en
+      alternance lorsque les conditions s’y prêtent.
+    </li>
+    <li>
+      <strong>Le droit de visite et d’hébergement</strong> — son rythme, les
+      vacances scolaires, les modalités de trajet.
+    </li>
+    <li>
+      <strong>La contribution à l’entretien et à l’éducation</strong> — son
+      montant, sa révision, la répartition des frais exceptionnels.
+    </li>
+  </ul>
+
+  <div class="avis">
+    <p>
+      Une organisation qui tient dans la durée vaut mieux qu’une victoire de
+      principe. Un calendrier trop rigide ou irréaliste au regard de vos
+      horaires produit du conflit à chaque échange d’enfant : nous construisons
+      une solution praticable.
+    </p>
+  </div>
+
+  <h2>La filiation</h2>
+  <p>
+    Établir, contester ou sécuriser un lien de filiation touche à l’identité
+    même de l’enfant. Ces actions sont enfermées dans des délais courts et leurs
+    effets sont définitifs : elles se préparent avec soin, et le plus tôt
+    possible.
+  </p>
+
+  <h2>L’adoption</h2>
+  <p>
+    Adoption de l’enfant du conjoint, adoption simple ou plénière : chaque forme
+    produit des effets différents sur la filiation d’origine, le nom et les
+    droits successoraux de l’enfant. Je vous aide à choisir celle qui correspond
+    à votre projet familial et à constituer le dossier soumis au tribunal.
+  </p>
+
+  <h2>L’assistance éducative</h2>
+  <p>
+    Lorsque le juge des enfants est saisi, une mesure d’assistance éducative
+    peut être décidée pour protéger un enfant en danger. Être convoqué dans ce
+    cadre n’est pas une accusation, mais la procédure est exigeante et ses
+    conséquences peuvent être lourdes. Vous avez le droit d’y être assisté, de
+    consulter le dossier et de faire valoir votre point de vue.
+  </p>
+
+  <h2>Les grands-parents</h2>
+  <p>
+    Lorsque le lien avec un petit-enfant est rompu, la loi reconnaît à l’enfant
+    le droit d’entretenir des relations avec ses ascendants. J’accompagne les
+    grands-parents qui souhaitent faire reconnaître ce droit, comme les parents
+    qui estiment devoir s’y opposer.
+  </p>
+</DomaineLayout>

@@ -1,0 +1,209 @@
+---
+import { cabinet, domaines } from '../data/cabinet';
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied-grille">
+      <div class="pied-bloc pied-identite">
+        <p class="pied-nom">{cabinet.nom}</p>
+        <p class="pied-titre">{cabinet.titre}</p>
+        <p class="pied-specialite">{cabinet.specialite}</p>
+      </div>
+
+      <div class="pied-bloc">
+        <h2 class="pied-titre-col">Le cabinet</h2>
+        <address>
+          {cabinet.adresse.rue}<br />
+          {`${cabinet.adresse.codePostal} ${cabinet.adresse.ville}`}<br />
+          <span class="pied-note">{cabinet.accueil}</span>
+        </address>
+        <p class="pied-metro">
+          {
+            cabinet.metro.map((m) => (
+              <span>
+                {m.station} <span class="pied-note">— lignes {m.lignes}</span>
+              </span>
+            ))
+          }
+        </p>
+      </div>
+
+      <div class="pied-bloc">
+        <h2 class="pied-titre-col">Nous joindre</h2>
+        <p>
+          <a class="pied-tel" href={`tel:${cabinet.telephoneLien}`}>
+            {cabinet.telephone}
+          </a><br />
+          <a href={`mailto:${cabinet.courriel}`}>{cabinet.courriel}</a><br />
+          <span class="pied-note">Fax {cabinet.fax}</span>
+        </p>
+      </div>
+
+      <nav class="pied-bloc" aria-label="Domaines d’intervention">
+        <h2 class="pied-titre-col">Domaines</h2>
+        <ul>
+          {
+            domaines.map((d) => (
+              <li>
+                <a href={`/${d.slug}`}>{d.court}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="pied-bas">
+      <p class="pied-note">
+        © {annee} Élodie Dutour. Avocat inscrit au barreau de Paris.
+      </p>
+      <ul class="pied-legal">
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+        <li>
+          <a href="/politique-de-confidentialite">Données personnelles</a>
+        </li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--encre);
+    color: rgba(239, 241, 236, 0.86);
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+    font-size: 1rem;
+    line-height: 1.68;
+  }
+
+  .pied-grille {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 2.5rem 2rem;
+  }
+
+  .pied a {
+    color: rgba(239, 241, 236, 0.86);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(239, 241, 236, 0.25);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .pied a:hover {
+    color: #fff;
+    border-bottom-color: currentColor;
+  }
+
+  .pied-nom {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--craie);
+    margin: 0 0 0.3rem;
+  }
+
+  .pied-titre,
+  .pied-specialite {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(239, 241, 236, 0.66);
+  }
+
+  .pied-specialite {
+    margin-top: 0.6rem;
+    max-width: 22rem;
+  }
+
+  .pied-titre-col {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    color: rgba(239, 241, 236, 0.55);
+    margin: 0 0 0.9rem;
+  }
+
+  .pied address {
+    font-style: normal;
+    margin-bottom: 0.9rem;
+  }
+
+  .pied-note {
+    color: rgba(239, 241, 236, 0.58);
+    font-size: 0.9rem;
+  }
+
+  .pied-metro {
+    margin: 0;
+    font-size: 0.92rem;
+  }
+
+  .pied-metro > span {
+    display: block;
+  }
+
+  .pied-metro > span + span {
+    margin-top: 0.3rem;
+  }
+
+  .pied-tel {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--craie) !important;
+  }
+
+  .pied ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pied-bloc li + li {
+    margin-top: 0.45rem;
+  }
+
+  .pied-bas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: clamp(2.5rem, 5vw, 3.75rem);
+    padding-top: 1.5rem;
+    border-top: var(--rule-encre);
+  }
+
+  .pied-bas p {
+    margin: 0;
+  }
+
+  .pied-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    .pied-grille {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pied-identite {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .pied-grille {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+import { cabinet } from '../data/cabinet';
+
+interface Props {
+  titre?: string;
+  texte?: string;
+  /** Variante claire, pour les pages dont le bas est déjà sombre */
+  clair?: boolean;
+}
+
+const {
+  titre = 'Parlons de votre situation',
+  texte = 'Le premier rendez-vous sert à faire le point : ce que dit le droit dans votre cas, les options qui s’offrent à vous, et ce que chacune implique. Vous repartez avec une réponse, que vous me confiiez le dossier ou non.',
+  clair = false,
+} = Astro.props;
+---
+
+<section class:list={['appel', clair ? 'appel-clair' : 'appel-encre']}>
+  <div class="enveloppe appel-grille">
+    <div class="appel-texte">
+      <h2 class="titre-section">{titre}</h2>
+      <p>{texte}</p>
+    </div>
+
+    <div class="appel-coordonnees">
+      <a class="appel-tel" href={`tel:${cabinet.telephoneLien}`}>
+        {cabinet.telephone}
+      </a>
+      <a class="appel-courriel" href={`mailto:${cabinet.courriel}`}>
+        {cabinet.courriel}
+      </a>
+      <a class="bouton" href="/contact">Prendre rendez-vous</a>
+      <p class="appel-note">
+        {`${cabinet.adresse.rue}, ${cabinet.adresse.codePostal} ${cabinet.adresse.ville}`}
+        — {cabinet.accueil.toLowerCase()}.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .appel {
+    padding-block: clamp(3.25rem, 7vw, 5.25rem);
+  }
+
+  .appel-encre {
+    background: var(--encre);
+    color: var(--craie);
+  }
+
+  .appel-clair {
+    background: var(--craie-ombre);
+    color: var(--encre);
+  }
+
+  .appel-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+
+  .appel h2 {
+    margin-bottom: 1rem;
+  }
+
+  .appel-encre h2 {
+    color: var(--craie);
+  }
+
+  .appel-texte p {
+    font-size: var(--t-1);
+    line-height: 1.7;
+    max-width: 34rem;
+    margin: 0;
+  }
+
+  .appel-encre .appel-texte p {
+    color: rgba(239, 241, 236, 0.84);
+  }
+
+  .appel-clair .appel-texte p {
+    color: var(--grafite);
+  }
+
+  .appel-coordonnees {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding-top: 0.4rem;
+  }
+
+  .appel-tel {
+    font-family: var(--sans);
+    font-size: 1.65rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+  .appel-encre .appel-tel {
+    color: var(--craie);
+  }
+
+  .appel-clair .appel-tel {
+    color: var(--encre);
+  }
+
+  .appel-tel:hover {
+    color: var(--bordeaux-clair);
+  }
+
+  .appel-courriel {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.1rem;
+  }
+
+  .appel-encre .appel-courriel {
+    color: rgba(239, 241, 236, 0.78);
+  }
+
+  .appel-clair .appel-courriel {
+    color: var(--grafite);
+  }
+
+  .appel-coordonnees .bouton {
+    margin-top: 0.75rem;
+  }
+
+  .appel-encre .bouton {
+    background: var(--craie);
+    border-color: var(--craie);
+    color: var(--encre);
+  }
+
+  .appel-encre .bouton:hover {
+    background: #fff;
+    border-color: #fff;
+    color: var(--encre);
+  }
+
+  .appel-note {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0.35rem 0 0;
+    max-width: 20rem;
+  }
+
+  .appel-encre .appel-note {
+    color: rgba(239, 241, 236, 0.55);
+  }
+
+  .appel-clair .appel-note {
+    color: var(--grafite);
+  }
+
+  @media (max-width: 820px) {
+    .appel-grille {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

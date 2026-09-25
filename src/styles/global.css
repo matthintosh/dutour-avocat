@@ -1,0 +1,333 @@
+/* ==========================================================================
+   Cabinet Élodie Dutour — feuille de style de base
+   Encre pétrole tirée du fond du portrait · craie · bordeaux judiciaire
+   ========================================================================== */
+
+:root {
+  /* Couleurs */
+  --encre: #102028;
+  --encre-profond: #0a1114;
+  --encre-clair: #2a464f;
+  --encre-voile: #486069;
+  --craie: #eff1ec;
+  --craie-ombre: #e3e7e0;
+  --papier: #fbfcfa;
+  --bordeaux: #7b2d3e;
+  --bordeaux-clair: #9c4256;
+  /* Accent lisible sur fond encre (3,6:1) — filets, repères de navigation */
+  --bordeaux-sombre: #b55668;
+  --grafite: #556465;
+
+  /* Typographie */
+  --serif: 'Spectral', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --sans: 'Archivo Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Échelle modulaire ~1.25, ancrée sur 18px */
+  --t--1: 0.833rem;
+  --t-0: 1rem;
+  --t-1: 1.15rem;
+  --t-2: 1.36rem;
+  --t-3: 1.66rem;
+  --t-4: 2.05rem;
+  --t-5: clamp(2.1rem, 1.55rem + 2.4vw, 3.1rem);
+  --t-6: clamp(2.5rem, 1.5rem + 4.4vw, 4.6rem);
+
+  /* Rythme */
+  --mesure: 34rem;
+  --mesure-large: 46rem;
+  --gouttiere: clamp(1.25rem, 5vw, 3.5rem);
+  --section: clamp(3.5rem, 8vw, 6.5rem);
+
+  --rule: 1px solid var(--craie-ombre);
+  --rule-encre: 1px solid rgba(239, 241, 236, 0.18);
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------- reset -- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.72;
+  color: var(--encre);
+  background: var(--craie);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern', 'liga', 'onum';
+  overflow-x: hidden;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+p {
+  margin: 0 0 1.1em;
+}
+
+a {
+  color: var(--bordeaux);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba(123, 45, 62, 0.4);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--bordeaux-clair);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bordeaux);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--encre);
+  color: var(--craie);
+}
+
+/* ------------------------------------------------------------- charpente -- */
+
+.enveloppe {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+
+.mesure {
+  max-width: var(--mesure);
+}
+
+.mesure-large {
+  max-width: var(--mesure-large);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.section-encre {
+  background: var(--encre);
+  color: var(--craie);
+}
+
+.section-encre h1,
+.section-encre h2,
+.section-encre h3 {
+  color: var(--craie);
+}
+
+.section-encre a {
+  color: var(--craie);
+  text-decoration-color: rgba(239, 241, 236, 0.45);
+}
+
+.section-encre a:hover {
+  color: #fff;
+}
+
+.trait {
+  border: 0;
+  border-top: var(--rule);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------ typographie -- */
+
+.titre-page {
+  font-size: var(--t-5);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.titre-section {
+  font-size: var(--t-4);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+.titre-bloc {
+  font-size: var(--t-2);
+  font-weight: 600;
+}
+
+.chapeau {
+  font-size: var(--t-2);
+  line-height: 1.58;
+  color: var(--encre-clair);
+  font-weight: 300;
+}
+
+.section-encre .chapeau {
+  color: rgba(239, 241, 236, 0.86);
+}
+
+.menu-mention,
+.mention {
+  font-family: var(--sans);
+  font-size: var(--t--1);
+  line-height: 1.6;
+  color: var(--grafite);
+  letter-spacing: 0.005em;
+}
+
+.section-encre .mention {
+  color: rgba(239, 241, 236, 0.64);
+}
+
+/* ---------------------------------------------------------------- boutons -- */
+
+.bouton,
+.bouton-fantome {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  padding: 0.95rem 1.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.16s ease, color 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.bouton {
+  background: var(--bordeaux);
+  color: #fff;
+  border-color: var(--bordeaux);
+}
+
+.bouton:hover {
+  background: var(--bordeaux-clair);
+  border-color: var(--bordeaux-clair);
+  color: #fff;
+}
+
+.bouton-fantome {
+  background: transparent;
+  color: var(--encre);
+  border-color: rgba(20, 49, 59, 0.28);
+}
+
+.bouton-fantome:hover {
+  border-color: var(--encre);
+  background: rgba(20, 49, 59, 0.04);
+  color: var(--encre);
+}
+
+.section-encre .bouton-fantome {
+  color: var(--craie);
+  border-color: rgba(239, 241, 236, 0.4);
+}
+
+.section-encre .bouton-fantome:hover {
+  border-color: var(--craie);
+  background: rgba(239, 241, 236, 0.08);
+  color: var(--craie);
+}
+
+/* Lien téléphone mis en avant, sans décor */
+.tel-fort {
+  font-family: var(--sans);
+  font-size: var(--t-1);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ accessibilité -- */
+
+.saut-contenu {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--encre);
+  color: var(--craie);
+  font-family: var(--sans);
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+}
+
+.saut-contenu:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  color: var(--craie);
+}
+
+.invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media print {
+  .section-encre {
+    background: #fff;
+    color: #000;
+  }
+}

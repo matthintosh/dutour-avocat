@@ -1,0 +1,151 @@
+---
+import DomaineLayout from '../layouts/Domaine.astro';
+import { getDomaine } from '../data/cabinet';
+
+const domaine = getDomaine('divorce-et-separation');
+
+const description =
+  'Avocat divorce à Paris. Divorce par consentement mutuel ou contentieux, dissolution de PACS, séparation de concubins, mesures provisoires. Maître Élodie Dutour, barreau de Paris.';
+
+const etapes = [
+  {
+    titre: 'Le premier rendez-vous',
+    texte:
+      'Vous exposez votre situation : la date de la séparation, les enfants, les biens, les revenus de chacun. J’identifie la procédure adaptée et je vous dis ce qu’elle implique en temps, en coût et en conséquences.',
+  },
+  {
+    titre: 'La convention d’honoraires',
+    texte:
+      'Avant tout travail, nous signons une convention qui fixe le montant et les modalités de mes honoraires. Vous savez ce que vous engagez.',
+  },
+  {
+    titre: 'La tentative d’accord',
+    texte:
+      'Chaque fois que c’est possible, je cherche d’abord un accord : il est plus rapide, moins coûteux et mieux respecté dans la durée qu’une décision imposée. C’est la voie du divorce par consentement mutuel.',
+  },
+  {
+    titre: 'Les mesures provisoires',
+    texte:
+      'Si le désaccord persiste, l’audience d’orientation fixe ce qui s’applique pendant la procédure : qui reste dans le logement, la résidence des enfants, la pension alimentaire.',
+  },
+  {
+    titre: 'Le jugement et la liquidation',
+    texte:
+      'Le divorce est prononcé, puis le patrimoine du couple est partagé. Je vous accompagne jusqu’à ce partage, qui est souvent la partie la plus longue.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Combien de temps dure un divorce ?',
+    reponse:
+      'Un divorce par consentement mutuel se conclut généralement en deux à quatre mois, le temps de rédiger la convention et de respecter le délai de réflexion de quinze jours imposé par la loi. Un divorce contentieux dure plus longtemps — souvent un à deux ans — selon la complexité du patrimoine, le degré de désaccord et l’encombrement de la juridiction saisie.',
+  },
+  {
+    question:
+      'Faut-il un avocat chacun pour un divorce par consentement mutuel ?',
+    reponse:
+      'Oui. Depuis 2017, le divorce par consentement mutuel se fait par acte d’avocats déposé chez un notaire, et la loi impose que chaque époux ait son propre avocat. Ce n’est pas une formalité : c’est la garantie que chacun a été conseillé séparément sur ce qu’il signe.',
+  },
+  {
+    question: 'Dois-je quitter le domicile conjugal ?',
+    reponse:
+      'Ne quittez pas le logement familial sans conseil préalable. Un départ précipité peut vous être opposé et compliquer la fixation de la résidence des enfants. Si la situation est tendue ou dangereuse, des mesures existent pour vous protéger sans que ce départ vous porte préjudice : parlons-en avant que vous ne preniez votre décision.',
+  },
+  {
+    question: 'Comment sont partagés les biens ?',
+    reponse:
+      'Cela dépend de votre régime matrimonial. Sous le régime légal de la communauté réduite aux acquêts, les biens acquis pendant le mariage se partagent par moitié, tandis que ceux reçus par donation ou succession restent propres. Sous un régime de séparation de biens, chacun conserve ce qu’il a acquis, mais des comptes restent à faire entre les époux.',
+  },
+  {
+    question: 'Mon conjoint refuse le divorce, puis-je divorcer quand même ?',
+    reponse:
+      'Oui. Personne ne peut être retenu dans un mariage. À défaut d’accord, le divorce peut être demandé pour altération définitive du lien conjugal après un an de séparation, ou pour faute. Le refus de votre conjoint rallonge la procédure ; il ne l’empêche pas.',
+  },
+  {
+    question: 'Et si nous étions pacsés ou simplement en concubinage ?',
+    reponse:
+      'La rupture d’un PACS est plus simple sur le principe — une déclaration conjointe ou une signification suffit — mais elle laisse les mêmes questions à régler : le logement, les biens achetés ensemble, les enfants. Pour les concubins, aucune procédure de séparation n’existe, ce qui rend le partage des biens indivis et l’organisation de la vie des enfants d’autant plus utiles à formaliser.',
+  },
+];
+---
+
+<DomaineLayout
+  domaine={domaine}
+  description={description}
+  etapes={etapes}
+  etapesIntro="Une séparation suit un chemin balisé. Le connaître à l’avance évite les mauvaises surprises."
+  faq={faq}
+>
+  <h2>Choisir la procédure qui correspond à votre situation</h2>
+
+  <p>
+    Il n’existe pas un divorce mais plusieurs, et le choix entre eux détermine
+    la durée, le coût et le climat de la séparation. Ce choix se fait au premier
+    rendez-vous, une fois votre situation posée.
+  </p>
+
+  <h3>Le divorce par consentement mutuel</h3>
+  <p>
+    Vous êtes d’accord sur le principe du divorce <em>et</em> sur toutes ses
+    conséquences : les enfants, le logement, le partage des biens, une
+    éventuelle prestation compensatoire. La convention est signée par les deux
+    avocats puis déposée au rang des minutes d’un notaire. C’est la voie la plus
+    rapide et la moins coûteuse, et celle que je cherche à privilégier lorsque
+    les conditions en sont réunies.
+  </p>
+
+  <h3>Le divorce contentieux</h3>
+  <p>
+    Le désaccord porte sur le principe du divorce ou sur ses conséquences. Le
+    juge aux affaires familiales est saisi ; il fixe d’abord des mesures
+    provisoires applicables pendant l’instance, puis tranche. Selon la
+    situation, le divorce est demandé pour acceptation du principe de la
+    rupture, pour altération définitive du lien conjugal, ou pour faute.
+  </p>
+
+  <div class="avis">
+    <p>
+      Un divorce contentieux peut devenir amiable en cours de route. Un accord
+      trouvé à mi-parcours reste possible et reste préférable : je ne considère
+      jamais la voie contentieuse comme définitivement fermée à la négociation.
+    </p>
+  </div>
+
+  <h2>Les questions qui se règlent en même temps</h2>
+
+  <p>
+    Le divorce n’est qu’un cadre. Ce qui compte pour votre vie quotidienne se
+    joue dans les questions qui s’y rattachent :
+  </p>
+
+  <ul>
+    <li>
+      <strong>Le logement</strong> — qui y reste pendant la procédure, à quelles
+      conditions, et ce qu’il devient ensuite.
+    </li>
+    <li>
+      <strong>Les enfants</strong> — résidence, droit de visite et
+      d’hébergement, contribution à leur entretien et à leur éducation.
+    </li>
+    <li>
+      <strong>La prestation compensatoire</strong> — destinée à compenser la
+      disparité de niveau de vie que le divorce crée entre les époux.
+    </li>
+    <li>
+      <strong>Le partage du patrimoine</strong> — liquidation du régime
+      matrimonial, sort des biens indivis, reprise des emprunts.
+    </li>
+  </ul>
+
+  <h2>Rompre un PACS ou une union libre</h2>
+  <p>
+    La loi organise peu la séparation des partenaires de PACS et pas du tout
+    celle des concubins. C’est précisément ce qui la rend délicate : il n’y a ni
+    juge du divorce ni cadre automatique, mais un logement acheté à deux, des
+    crédits en cours et parfois des enfants. Je vous aide à formaliser ce
+    partage et, s’il y a des enfants, à faire fixer les modalités de leur vie
+    avec chacun de vous — la seule voie possible étant alors la saisine du juge
+    aux affaires familiales.
+  </p>
+</DomaineLayout>

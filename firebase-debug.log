@@ -1,0 +1,29 @@
+[debug] [2026-09-25T09:05:44.113Z] ----------------------------------------------------------------------
+[debug] [2026-09-25T09:05:44.116Z] Command:       /opt/homebrew/Cellar/node@24/24.21.0/bin/node /opt/homebrew/bin/firebase deploy
+[debug] [2026-09-25T09:05:44.117Z] CLI Version:   15.19.0
+[debug] [2026-09-25T09:05:44.117Z] Platform:      darwin
+[debug] [2026-09-25T09:05:44.117Z] Node Version:  v24.21.0
+[debug] [2026-09-25T09:05:44.117Z] Time:          Fri Sep 25 2026 11:05:44 GMT+0200 (heure d’été d’Europe centrale)
+[debug] [2026-09-25T09:05:44.117Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-09-25T09:05:44.886Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-09-25T09:05:45.064Z] Running auto auth
+[debug] [2026-09-25T09:05:45.065Z] [iam] checking project dutour-avocat for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-09-25T09:05:45.065Z] No OAuth tokens found
+[debug] [2026-09-25T09:05:45.066Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions [none]
+[debug] [2026-09-25T09:05:45.066Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions  x-goog-user-project=dutour-avocat
+[debug] [2026-09-25T09:05:45.066Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-09-25T09:05:45.803Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions 403
+[debug] [2026-09-25T09:05:45.803Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions {"error":{"code":403,"message":"Caller does not have required permission to use project dutour-avocat. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=dutour-avocat and then retry. Propagation of the new permission may take a few minutes.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"USER_PROJECT_DENIED","domain":"googleapis.com","metadata":{"consoleUrl":"https://console.developers.google.com/iam-admin/iam?project=dutour-avocat","consumer":"projects/dutour-avocat","containerInfo":"dutour-avocat","service":"cloudresourcemanager.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Caller does not have required permission to use project dutour-avocat. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=dutour-avocat and then retry. Propagation of the new permission may take a few minutes."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developer console IAM admin","url":"https://console.developers.google.com/iam-admin/iam?project=dutour-avocat"}]}]}}
+[debug] [2026-09-25T09:05:45.804Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/dutour-avocat:testIamPermissions had HTTP Error: 403, Caller does not have required permission to use project dutour-avocat. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=dutour-avocat and then retry. Propagation of the new permission may take a few minutes.
+[debug] [2026-09-25T09:05:45.804Z] No OAuth tokens found
+[debug] [2026-09-25T09:05:45.804Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dutour-avocat [none]
+[debug] [2026-09-25T09:05:46.202Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dutour-avocat 403
+[debug] [2026-09-25T09:05:46.202Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dutour-avocat {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-09-25T09:05:46.203Z] Request to https://firebase.googleapis.com/v1beta1/projects/dutour-avocat had HTTP Error: 403, The caller does not have permission
+[debug] [2026-09-25T09:05:46.204Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/dutour-avocat had HTTP Error: 403, The caller does not have permission
+    at responseToError (/opt/homebrew/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/opt/homebrew/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to get Firebase project dutour-avocat. Please make sure the project exists and your account has permission to access it.

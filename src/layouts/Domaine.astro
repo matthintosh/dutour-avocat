@@ -1,0 +1,331 @@
+---
+import Base from './Base.astro';
+import Etapes from '../components/Etapes.astro';
+import Faq from '../components/Faq.astro';
+import AppelAction from '../components/AppelAction.astro';
+import { cabinet, domaines, type Domaine } from '../data/cabinet';
+
+interface Props {
+  domaine: Domaine;
+  description: string;
+  etapes: { titre: string; texte: string }[];
+  etapesIntro?: string;
+  faq: { question: string; reponse: string }[];
+}
+
+const { domaine, description, etapes, etapesIntro, faq } = Astro.props;
+const autres = domaines.filter((d) => d.slug !== domaine.slug);
+---
+
+<Base titre={domaine.titre} description={description} faq={faq}>
+  <!-- ==================================================== en-tête ====== -->
+  <section class="tete">
+    <div class="enveloppe tete-grille">
+      <div class="tete-texte">
+        <h1 class="titre-page">{domaine.titre}</h1>
+        <p class="tete-situation">{domaine.situation}</p>
+      </div>
+
+      <div class="tete-appel">
+        <p class="tete-appel-mot">Un doute sur votre situation ?</p>
+        <a class="tete-tel" href={`tel:${cabinet.telephoneLien}`}>
+          {cabinet.telephone}
+        </a>
+        <a class="tete-rdv" href="/contact">Prendre rendez-vous</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== contenu ====== -->
+  <section class="section">
+    <div class="enveloppe corps-grille">
+      <div class="corps-texte">
+        <slot />
+      </div>
+
+      <aside class="interventions" aria-labelledby="t-interventions">
+        <h2 class="interventions-titre" id="t-interventions">
+          Mes interventions
+        </h2>
+        <ul>
+          {domaine.interventions.map((i) => <li>{i}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <Etapes etapes={etapes} intro={etapesIntro} />
+
+  <Faq questions={faq} />
+
+  <!-- ===================================================== autres ====== -->
+  <section class="section autres-section" aria-labelledby="t-autres">
+    <div class="enveloppe">
+      <h2 class="titre-bloc" id="t-autres">Les autres domaines du cabinet</h2>
+      <ul class="autres">
+        {
+          autres.map((d) => (
+            <li>
+              <a href={`/${d.slug}`}>
+                <span class="autres-nom">{d.court}</span>
+                <span class="autres-resume">{d.situation}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <AppelAction />
+</Base>
+
+<style>
+  /* ===================================================== en-tête ====== */
+
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+  }
+
+  .tete-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 2rem 4rem;
+    padding-block: clamp(2.75rem, 6vw, 4.5rem);
+  }
+
+  .tete h1 {
+    color: var(--craie);
+    margin-bottom: 1.1rem;
+  }
+
+  .tete-situation {
+    font-size: var(--t-2);
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(239, 241, 236, 0.84);
+    max-width: 33rem;
+    margin: 0;
+  }
+
+  .tete-appel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding-left: 2.5rem;
+    border-left: var(--rule-encre);
+  }
+
+  .tete-appel-mot {
+    font-family: var(--sans);
+    font-size: 0.83rem;
+    color: rgba(239, 241, 236, 0.55);
+    margin: 0;
+  }
+
+  .tete-tel {
+    font-family: var(--sans);
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--craie);
+    text-decoration: none;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .tete-tel:hover {
+    color: #fff;
+  }
+
+  .tete-rdv {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: rgba(239, 241, 236, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(239, 241, 236, 0.4);
+    padding-bottom: 0.1rem;
+    margin-top: 0.3rem;
+  }
+
+  .tete-rdv:hover {
+    color: var(--craie);
+    border-bottom-color: currentColor;
+  }
+
+  @media (max-width: 820px) {
+    .tete-grille {
+      grid-template-columns: 1fr;
+    }
+
+    .tete-appel {
+      padding-left: 0;
+      padding-top: 1.5rem;
+      border-left: none;
+      border-top: var(--rule-encre);
+      align-self: stretch;
+    }
+  }
+
+  /* ===================================================== contenu ====== */
+
+  .corps-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+
+  .corps-texte {
+    max-width: var(--mesure-large);
+    font-size: 1.09rem;
+    line-height: 1.76;
+  }
+
+  .corps-texte :global(h2) {
+    font-size: var(--t-3);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    margin: 2.5rem 0 0.9rem;
+  }
+
+  .corps-texte :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .corps-texte :global(h3) {
+    font-size: var(--t-1);
+    font-weight: 600;
+    margin: 1.9rem 0 0.5rem;
+  }
+
+  .corps-texte :global(ul) {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .corps-texte :global(ul li) {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .corps-texte :global(ul li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 0.45rem;
+    height: 1px;
+    background: var(--bordeaux);
+  }
+
+  /* Encadré de mise en garde / point d'attention */
+  .corps-texte :global(.avis) {
+    border-left: 2px solid var(--bordeaux);
+    padding: 0.2rem 0 0.2rem 1.25rem;
+    margin: 1.9rem 0;
+    color: var(--grafite);
+    font-size: 1.02rem;
+  }
+
+  .corps-texte :global(.avis p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Liste des interventions : reprise fidèle du cabinet */
+  .interventions {
+    position: sticky;
+    top: 1.5rem;
+    background: var(--papier);
+    border-top: 2px solid var(--encre);
+    padding: 1.5rem 1.6rem 1.75rem;
+  }
+
+  .interventions-titre {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--grafite);
+    margin: 0 0 1rem;
+  }
+
+  .interventions ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .interventions li {
+    font-size: 0.99rem;
+    line-height: 1.58;
+    padding-block: 0.7rem;
+    border-top: var(--rule);
+  }
+
+  .interventions li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  @media (max-width: 900px) {
+    .corps-grille {
+      grid-template-columns: 1fr;
+    }
+
+    .interventions {
+      position: static;
+      max-width: var(--mesure-large);
+    }
+  }
+
+  /* ====================================================== autres ====== */
+
+  .autres-section {
+    padding-block: clamp(2.75rem, 5vw, 4rem);
+    border-top: var(--rule);
+  }
+
+  .autres {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem 2.5rem;
+  }
+
+  .autres a {
+    display: block;
+    text-decoration: none;
+    color: var(--encre);
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--craie-ombre);
+    transition: border-color 0.15s ease;
+  }
+
+  .autres a:hover {
+    border-top-color: var(--bordeaux);
+  }
+
+  .autres-nom {
+    display: block;
+    font-size: var(--t-1);
+    margin-bottom: 0.3rem;
+  }
+
+  .autres a:hover .autres-nom {
+    color: var(--bordeaux);
+  }
+
+  .autres-resume {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.58;
+    color: var(--grafite);
+  }
+</style>

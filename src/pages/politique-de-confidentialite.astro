@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+import { cabinet } from '../data/cabinet';
+
+const description =
+  'Politique de confidentialité du site dutour-avocat.fr : données collectées, finalités, durée de conservation et exercice de vos droits.';
+---
+
+<Base titre="Politique de confidentialité" description={description} noindex>
+  <section class="tete">
+    <div class="enveloppe">
+      <h1 class="titre-page">Données personnelles</h1>
+      <p class="tete-texte">
+        Ce site ne dépose aucun cookie, n’utilise aucun outil de mesure
+        d’audience et ne charge aucune ressource depuis un service tiers.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe legal">
+      <h2>Responsable du traitement</h2>
+      <p>
+        Maître Élodie Dutour, avocat au barreau de Paris<br />
+        {`${cabinet.adresse.rue}, ${cabinet.adresse.codePostal} ${cabinet.adresse.ville}`}<br />
+        <a href={`mailto:${cabinet.courriel}`}>{cabinet.courriel}</a> — {
+          cabinet.telephone
+        }
+      </p>
+
+      <h2>Cookies et mesure d’audience</h2>
+      <p>
+        Ce site ne dépose <strong>aucun cookie</strong> sur votre terminal. Il
+        n’utilise ni Google Analytics ni aucun autre outil de suivi. Les
+        caractères typographiques, les images et les feuilles de style sont
+        servis depuis ce site : aucune requête n’est adressée à un service tiers
+        lors de votre visite, et votre adresse IP n’est donc communiquée à
+        personne d’autre que l’hébergeur.
+      </p>
+      <p>
+        Aucune bannière de consentement n’est nécessaire, faute de traitement
+        soumis à consentement.
+      </p>
+
+      <h2>Données collectées par le formulaire de contact</h2>
+      <p>
+        Le formulaire de contact recueille les informations que vous y saisissez
+        volontairement : nom et prénom, adresse de courriel, numéro de téléphone
+        le cas échéant, domaine concerné et contenu de votre message.
+      </p>
+      <ul>
+        <li>
+          <strong>Finalité</strong> — répondre à votre demande et, si vous le
+          souhaitez, organiser un rendez-vous.
+        </li>
+        <li>
+          <strong>Base légale</strong> — votre consentement, recueilli par la
+          case à cocher du formulaire, ainsi que les mesures précontractuelles
+          prises à votre demande.
+        </li>
+        <li>
+          <strong>Destinataire</strong> — Maître Élodie Dutour seule. Aucune
+          donnée n’est vendue, louée, cédée ni utilisée à des fins de
+          prospection.
+        </li>
+        <li>
+          <strong>Durée de conservation</strong> — trois ans à compter du
+          dernier échange si la demande n’aboutit pas. Si vous devenez client du
+          cabinet, vos données sont conservées pendant la durée du dossier puis
+          selon les obligations légales et déontologiques de conservation des
+          archives de l’avocat.
+        </li>
+      </ul>
+
+      <div class="avis">
+        <p>
+          <strong>Ne transmettez pas d’éléments confidentiels par le
+          formulaire.</strong> Indiquez seulement la nature de votre situation
+          et vos coordonnées. Les détails de votre dossier se discutent par
+          téléphone ou au cabinet.
+        </p>
+      </div>
+
+      <h2>Secret professionnel</h2>
+      <p>
+        Indépendamment de la réglementation sur les données personnelles, tout
+        échange avec un avocat est couvert par le secret professionnel, qui est
+        général, absolu et illimité dans le temps (article 2 du Règlement
+        Intérieur National). Il s’applique dès le premier contact, y compris si
+        vous ne confiez finalement pas votre dossier au cabinet.
+      </p>
+
+      <h2>Hébergement et sécurité</h2>
+      <p>
+        Le site est hébergé au sein de l’Union européenne. Les échanges avec le
+        site sont chiffrés (HTTPS). Les données transmises par le formulaire
+        sont acheminées vers la messagerie du cabinet et ne sont pas stockées
+        sur le site.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Conformément au Règlement général sur la protection des données (UE)
+        2016/679 et à la loi n° 78-17 du 6 janvier 1978 modifiée, vous disposez
+        d’un droit d’accès, de rectification, d’effacement et de portabilité de
+        vos données, ainsi que d’un droit à la limitation et d’un droit
+        d’opposition au traitement.
+      </p>
+      <p>
+        Pour exercer ces droits, écrivez à
+        <a href={`mailto:${cabinet.courriel}`}>{cabinet.courriel}</a> ou par
+        courrier à l’adresse du cabinet. Une réponse vous sera apportée dans le
+        délai d’un mois.
+      </p>
+      <p>
+        Si vous estimez, après nous avoir contactés, que vos droits ne sont pas
+        respectés, vous pouvez adresser une réclamation à la Commission
+        nationale de l’informatique et des libertés (CNIL) — 3 place de
+        Fontenoy, TSA 80715, 75334 Paris Cedex 07 —
+        <a href="https://www.cnil.fr" rel="noopener noreferrer">cnil.fr</a>.
+      </p>
+
+      <h2>Modification</h2>
+      <p class="mention">
+        Cette politique peut être mise à jour pour tenir compte d’évolutions du
+        site ou de la réglementation. Dernière mise à jour : 2026.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+    padding-block: clamp(2.5rem, 5vw, 3.75rem);
+  }
+
+  .tete h1 {
+    color: var(--craie);
+    margin-bottom: 1rem;
+  }
+
+  .tete-texte {
+    font-size: var(--t-1);
+    line-height: 1.66;
+    color: rgba(239, 241, 236, 0.84);
+    max-width: 34rem;
+    margin: 0;
+  }
+
+  .legal {
+    max-width: var(--mesure-large);
+    font-size: 1.05rem;
+    line-height: 1.74;
+  }
+
+  .legal h2 {
+    font-size: var(--t-2);
+    font-weight: 500;
+    margin: 2.5rem 0 0.8rem;
+    padding-top: 1.25rem;
+    border-top: var(--rule);
+  }
+
+  .legal h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .legal ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .legal li {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .legal li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 0.45rem;
+    height: 1px;
+    background: var(--bordeaux);
+  }
+
+  .avis {
+    border-left: 2px solid var(--bordeaux);
+    background: var(--papier);
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+
+  .avis p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.68;
+    color: var(--grafite);
+  }
+
+  .avis strong {
+    color: var(--encre);
+  }
+</style>

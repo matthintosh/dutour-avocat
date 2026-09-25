@@ -1,0 +1,136 @@
+---
+import DomaineLayout from '../layouts/Domaine.astro';
+import { getDomaine } from '../data/cabinet';
+
+const domaine = getDomaine('droit-penal');
+
+const description =
+  'Avocat pénaliste à Paris : garde à vue, audition libre, instruction, comparution, assistance des victimes et constitution de partie civile. Maître Élodie Dutour, barreau de Paris.';
+
+const etapes = [
+  {
+    titre: 'L’appel',
+    texte:
+      'En garde à vue, vous avez le droit d’être assisté d’un avocat dès la première heure. Faites-moi désigner par les enquêteurs, ou faites-moi appeler par un proche : n’attendez pas la fin de la mesure.',
+  },
+  {
+    titre: 'L’entretien confidentiel',
+    texte:
+      'Avant toute audition, nous nous entretenons seuls. Je vous explique ce qui vous est reproché, ce que la procédure autorise, et les conséquences de chacune de vos options — y compris celle de garder le silence.',
+  },
+  {
+    titre: 'Les auditions',
+    texte:
+      'Je vous assiste pendant les auditions et les confrontations, je veille au respect de la procédure et je fais consigner les observations utiles au procès-verbal.',
+  },
+  {
+    titre: 'L’orientation du dossier',
+    texte:
+      'Classement, alternative aux poursuites, ouverture d’une information judiciaire, comparution : selon la voie retenue, la stratégie de défense change. Je vous explique où vous en êtes.',
+  },
+  {
+    titre: 'L’audience',
+    texte:
+      'Devant le tribunal correctionnel, la cour criminelle ou la cour d’assises, je prépare votre dossier, vous prépare à l’audience et plaide votre défense ou vos intérêts de partie civile.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Je suis convoqué en garde à vue. Que dois-je faire ?',
+    reponse:
+      'Demandez immédiatement un avocat : c’est un droit qui vous est notifié et il s’exerce dès le début de la mesure. Demandez également l’examen par un médecin si votre état le justifie, et l’avis à un proche. N’attendez pas d’avoir été entendu pour faire appel à un avocat : ce sont les premières déclarations qui pèsent le plus lourd dans la suite du dossier.',
+  },
+  {
+    question: 'Quelle est la différence entre audition libre et garde à vue ?',
+    reponse:
+      'En audition libre, vous n’êtes pas privé de liberté et pouvez quitter les locaux à tout moment — ce qui doit vous être notifié. Vous avez malgré tout le droit d’être assisté d’un avocat. L’apparente légèreté de cette mesure est trompeuse : vos déclarations y ont exactement la même valeur qu’en garde à vue.',
+  },
+  {
+    question: 'Ai-je le droit de me taire ?',
+    reponse:
+      'Oui, et ce droit doit vous être notifié. Se taire ne peut pas être retenu contre vous comme un aveu. Selon l’état du dossier, s’expliquer immédiatement peut servir votre défense ou lui nuire : c’est précisément la décision sur laquelle l’avis d’un avocat, avant l’audition, est le plus utile.',
+  },
+  {
+    question: 'J’ai été victime d’une infraction. Dois-je prendre un avocat ?',
+    reponse:
+      'Ce n’est pas obligatoire, mais c’est souvent déterminant. La constitution de partie civile obéit à des règles et à des délais, et l’évaluation de votre préjudice — physique, matériel, moral — conditionne votre indemnisation. Être assisté évite aussi de traverser seul une procédure et une audience éprouvantes.',
+  },
+  {
+    question: 'Les violences au sein du couple relèvent-elles de ce domaine ?',
+    reponse:
+      'Elles relèvent des deux : du pénal pour les poursuites et la protection, du droit de la famille pour l’ordonnance de protection, la résidence des enfants et l’éviction du conjoint violent. Traiter les deux volets ensemble, avec le même avocat, évite les contradictions entre procédures et fait gagner un temps qui compte.',
+  },
+];
+---
+
+<DomaineLayout
+  domaine={domaine}
+  description={description}
+  etapes={etapes}
+  etapesIntro="Une procédure pénale va vite au début et lentement ensuite. Les premières heures sont celles où l’assistance d’un avocat change le plus de choses."
+  faq={faq}
+>
+  <h2>Être défendu dès la première heure</h2>
+
+  <p>
+    Une garde à vue, une convocation au commissariat ou une audition libre
+    placent la plupart des gens dans une situation qu’ils n’ont jamais connue,
+    face à des professionnels qui, eux, la connaissent parfaitement. Le
+    déséquilibre est réel. L’avocat est là pour le corriger.
+  </p>
+
+  <p>
+    J’interviens à tous les stades de la procédure, pour les personnes mises en
+    cause comme pour les victimes.
+  </p>
+
+  <h2>Si vous êtes mis en cause</h2>
+
+  <ul>
+    <li>
+      <strong>Pendant l’enquête</strong> — assistance en audition libre et en
+      garde à vue, entretien confidentiel préalable, accès aux pièces
+      communicables.
+    </li>
+    <li>
+      <strong>Au cours de l’instruction</strong> — assistance lors des
+      interrogatoires et confrontations, demandes d’actes, contestation des
+      mesures de contrôle judiciaire ou de détention.
+    </li>
+    <li>
+      <strong>Devant les juridictions de jugement</strong> — préparation du
+      dossier, plaidoirie, discussion de la peine et de ses aménagements.
+    </li>
+  </ul>
+
+  <div class="avis">
+    <p>
+      Ne cherchez pas à « vous expliquer » seul en pensant que la situation se
+      réglera plus vite. Une déclaration faite sans conseil se rattrape
+      difficilement : elle figure au dossier pour toute la durée de la
+      procédure.
+    </p>
+  </div>
+
+  <h2>Si vous êtes victime</h2>
+
+  <p>
+    Porter plainte n’est qu’une première étape, et elle ne garantit ni le suivi
+    du dossier ni la réparation de votre préjudice. Je vous assiste pour vous
+    constituer partie civile, suivre l’avancement de la procédure, faire
+    évaluer votre préjudice et en obtenir l’indemnisation, y compris devant les
+    dispositifs spécifiques comme la commission d’indemnisation des victimes
+    d’infractions.
+  </p>
+
+  <h2>Le lien avec le droit de la famille</h2>
+
+  <p>
+    Dans les dossiers de violences conjugales ou intrafamiliales, le pénal et le
+    droit de la famille avancent en parallèle : d’un côté la plainte et les
+    poursuites, de l’autre l’ordonnance de protection, la résidence des enfants
+    et le sort du logement. Parce que j’exerce dans les deux matières, ces deux
+    volets sont conduits ensemble plutôt que séparément.
+  </p>
+</DomaineLayout>

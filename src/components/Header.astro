@@ -1,0 +1,277 @@
+---
+import { cabinet, domaines } from '../data/cabinet';
+
+const chemin = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const liens = [
+  { href: '/le-cabinet', libelle: 'Le cabinet' },
+  ...domaines.map((d) => ({ href: `/${d.slug}`, libelle: d.court })),
+  { href: '/honoraires', libelle: 'Honoraires' },
+  { href: '/contact', libelle: 'Contact' },
+];
+---
+
+<header class="entete">
+  <div class="enveloppe entete-grille">
+    <a class="marque" href="/">
+      <span class="marque-nom">{cabinet.nom}</span>
+      <span class="marque-titre">{cabinet.titre}</span>
+    </a>
+
+    <button
+      class="bascule"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-principal"
+      data-bascule-menu
+    >
+      <span class="bascule-texte">Menu</span>
+      <span class="bascule-barres" aria-hidden="true"><i></i><i></i></span>
+    </button>
+
+    <nav id="menu-principal" class="menu" aria-label="Navigation principale">
+      <ul>
+        {
+          liens.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                aria-current={chemin === l.href ? 'page' : undefined}
+              >
+                {l.libelle}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="menu-tel" href={`tel:${cabinet.telephoneLien}`}>
+        {cabinet.telephone}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .entete {
+    background: var(--encre);
+    color: var(--craie);
+    position: relative;
+    z-index: 20;
+  }
+
+  .entete-grille {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-block: 1.15rem;
+  }
+
+  /* --- marque --- */
+
+  .marque {
+    display: block;
+    text-decoration: none;
+    color: var(--craie);
+    line-height: 1.25;
+  }
+
+  .marque:hover {
+    color: #fff;
+  }
+
+  .marque-nom {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.32rem;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+  }
+
+  .marque-titre {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.055em;
+    color: rgba(239, 241, 236, 0.64);
+    margin-top: 0.18rem;
+  }
+
+  /* --- navigation --- */
+
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 1.9rem;
+  }
+
+  .menu ul {
+    display: flex;
+    align-items: center;
+    gap: 1.55rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu a {
+    font-family: var(--sans);
+    font-size: 0.895rem;
+    font-weight: 400;
+    letter-spacing: 0.012em;
+    color: rgba(239, 241, 236, 0.82);
+    text-decoration: none;
+    padding-block: 0.35rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .menu a:hover {
+    color: var(--craie);
+    border-bottom-color: rgba(239, 241, 236, 0.35);
+  }
+
+  /* Le filet bordeaux signale la page courante */
+  .menu a[aria-current='page'] {
+    color: #fff;
+    border-bottom-color: var(--bordeaux-sombre);
+  }
+
+  .menu-tel {
+    font-family: var(--sans);
+    font-size: 0.935rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--craie);
+    text-decoration: none;
+    border: 1px solid rgba(239, 241, 236, 0.32);
+    border-radius: 2px;
+    padding: 0.5rem 0.9rem;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .menu-tel:hover {
+    background: rgba(239, 241, 236, 0.1);
+    border-color: var(--craie);
+    color: #fff;
+  }
+
+  /* --- bascule mobile --- */
+
+  .bascule {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    background: none;
+    border: 1px solid rgba(239, 241, 236, 0.32);
+    border-radius: 2px;
+    color: var(--craie);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    padding: 0.55rem 0.85rem;
+    cursor: pointer;
+  }
+
+  .bascule-barres {
+    display: grid;
+    gap: 4px;
+    width: 16px;
+  }
+
+  .bascule-barres i {
+    display: block;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .bascule[aria-expanded='true'] .bascule-barres i:first-child {
+    transform: translateY(2.75px) rotate(45deg);
+  }
+
+  .bascule[aria-expanded='true'] .bascule-barres i:last-child {
+    transform: translateY(-2.75px) rotate(-45deg);
+  }
+
+  @media (max-width: 1080px) {
+    .menu ul {
+      gap: 1.1rem;
+    }
+
+    .menu {
+      gap: 1.2rem;
+    }
+
+    .menu a {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 940px) {
+    .bascule {
+      display: inline-flex;
+    }
+
+    .menu {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding-top: 0.75rem;
+      border-top: var(--rule-encre);
+      margin-top: 0.4rem;
+    }
+
+    .menu[data-ouvert] {
+      display: flex;
+    }
+
+    .menu ul {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .menu li + li {
+      border-top: var(--rule-encre);
+    }
+
+    .menu ul a {
+      display: block;
+      font-size: 1rem;
+      padding-block: 0.85rem;
+      border-bottom: none;
+      border-left: 2px solid transparent;
+      padding-left: 0.8rem;
+    }
+
+    .menu ul a[aria-current='page'] {
+      border-left-color: var(--bordeaux-sombre);
+      border-bottom-color: transparent;
+    }
+
+    .menu-tel {
+      margin-top: 1rem;
+      text-align: center;
+      padding-block: 0.8rem;
+    }
+  }
+</style>
+
+<script>
+  const bascule = document.querySelector<HTMLButtonElement>(
+    '[data-bascule-menu]',
+  );
+  const menu = document.getElementById('menu-principal');
+
+  bascule?.addEventListener('click', () => {
+    const ouvert = bascule.getAttribute('aria-expanded') === 'true';
+    bascule.setAttribute('aria-expanded', String(!ouvert));
+    menu?.toggleAttribute('data-ouvert', !ouvert);
+  });
+</script>

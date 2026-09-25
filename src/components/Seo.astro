@@ -1,0 +1,111 @@
+---
+import { cabinet, adresseComplete } from '../data/cabinet';
+
+interface Props {
+  titre: string;
+  description: string;
+  /** Page sans intérêt pour l'indexation (mentions légales, confidentialité) */
+  noindex?: boolean;
+  /** Questions/réponses à exposer en FAQPage */
+  faq?: { question: string; reponse: string }[];
+}
+
+const { titre, description, noindex = false, faq } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(
+  /\/$/,
+  '',
+);
+const titreComplet =
+  titre === 'accueil'
+    ? `${cabinet.nom} — ${cabinet.titre}, droit de la famille`
+    : `${titre} — ${cabinet.nom}, avocat à Paris`;
+
+const organisation = {
+  '@context': 'https://schema.org',
+  '@type': 'Attorney',
+  '@id': `${cabinet.site}/#cabinet`,
+  name: `Cabinet ${cabinet.nom}`,
+  description: `${cabinet.titre}. ${cabinet.specialite}.`,
+  url: cabinet.site,
+  telephone: `+33 1 81 80 04 27`,
+  faxNumber: `+33 1 76 54 86 26`,
+  email: cabinet.courriel,
+  priceRange: '€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: cabinet.adresse.rue,
+    postalCode: cabinet.adresse.codePostal,
+    addressLocality: cabinet.adresse.ville,
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: cabinet.adresse.latitude,
+    longitude: cabinet.adresse.longitude,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Paris' },
+    { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+    { '@type': 'Country', name: 'France' },
+  ],
+  knowsLanguage: 'fr',
+  availableLanguage: 'fr',
+  founder: { '@type': 'Person', name: `Maître ${cabinet.nom}` },
+  foundingDate: '2019',
+  memberOf: { '@type': 'Organization', name: 'Barreau de Paris' },
+  knowsAbout: [
+    'Divorce',
+    'Droit de la famille',
+    'Autorité parentale',
+    'Filiation',
+    'Régimes matrimoniaux',
+    'Droit pénal',
+  ],
+};
+
+const faqSchema = faq?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.reponse },
+      })),
+    }
+  : null;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{titreComplet}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={`Cabinet ${cabinet.nom}`} />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content={titreComplet} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta name="theme-color" content="#102028" />
+<meta name="author" content={`Maître ${cabinet.nom}`} />
+<meta name="geo.placename" content={adresseComplete} />
+
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180" />
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organisation)}
+/>
+{
+  faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )
+}

@@ -1,0 +1,362 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import AppelAction from '../components/AppelAction.astro';
+import { cabinet } from '../data/cabinet';
+import portrait from '../assets/portrait.jpg';
+
+const description =
+  'Maître Élodie Dutour, avocat au barreau de Paris depuis 2019. Master « Personne et droit » de Paris 1 Panthéon-Sorbonne. Cabinet individuel dédié au droit de la famille, des personnes et de leur patrimoine.';
+
+const parcours = [
+  {
+    date: 'Université de Cergy-Pontoise',
+    texte: 'Maîtrise en droit privé général.',
+  },
+  {
+    date: 'Université Paris 1 Panthéon-Sorbonne',
+    texte: 'Master « Personne et droit ».',
+  },
+  {
+    date: 'École de formation du barreau',
+    texte:
+      'Examen d’entrée au barreau, puis formation à l’EFB et prestation de serment.',
+  },
+  {
+    date: 'Collaboration',
+    texte:
+      'Plusieurs années au sein de cabinets spécialisés en droit de la famille, des personnes et de leur patrimoine.',
+  },
+  {
+    date: '2019 — Création du cabinet',
+    texte:
+      'Installation à titre individuel, 92 boulevard de Sébastopol, dans le 3ᵉ arrondissement de Paris.',
+  },
+];
+---
+
+<Base titre="Le cabinet" description={description}>
+  <section class="tete">
+    <div class="enveloppe tete-grille">
+      <div>
+        <h1 class="titre-page">Élodie Dutour</h1>
+        <p class="tete-sous">{cabinet.titre}</p>
+        <p class="tete-texte">
+          J’exerce seule, et uniquement en droit de la famille, des personnes et
+          de leur patrimoine. C’est un choix : ces dossiers demandent une
+          disponibilité et une connaissance des juridictions que l’on n’a pas en
+          traitant tout.
+        </p>
+      </div>
+      <div class="tete-portrait">
+        <Image
+          src={portrait}
+          alt="Maître Élodie Dutour, avocat au barreau de Paris."
+          widths={[380, 620]}
+          sizes="(max-width: 820px) 60vw, 26vw"
+          loading="eager"
+          quality={82}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe deux-colonnes">
+      <div class="colonne-texte">
+        <h2 class="titre-section">Mon exercice</h2>
+        <p>
+          Avocat au barreau de Paris, j’interviens en conseil comme en
+          contentieux, principalement en droit de la famille, des personnes et
+          de leur patrimoine, ainsi qu’en droit pénal lorsque la situation
+          familiale l’appelle.
+        </p>
+        <p>
+          Après plusieurs années de collaboration au sein de cabinets
+          spécialisés dans ces matières, j’ai fondé mon cabinet en 2019 et
+          j’exerce désormais à titre individuel. J’interviens devant les
+          juridictions de la région parisienne ainsi que sur l’ensemble du
+          territoire français.
+        </p>
+        <p>
+          Je m’engage à traiter chaque dossier avec exigence, réactivité et
+          disponibilité, et j’adapte mon intervention aux besoins propres de
+          chaque client. Concrètement : vous avez un interlocuteur unique, vos
+          appels et vos courriels trouvent une réponse, et vous savez à tout
+          moment où en est votre affaire.
+        </p>
+
+        <h2 class="titre-section">Ce que vous pouvez attendre de moi</h2>
+        <p>
+          Une position claire, d’abord. Vous ne venez pas chercher un exposé du
+          droit mais une réponse à votre situation : ce qui est possible, ce qui
+          ne l’est pas, et ce que je vous recommande. Y compris lorsque cette
+          recommandation est de ne pas engager de procédure.
+        </p>
+        <p>
+          Une transparence sur le coût, ensuite. Les honoraires sont fixés avant
+          que je commence à travailler, par une convention écrite, et vous êtes
+          prévenu si le dossier prend une tournure qui modifie ce qui était
+          prévu.
+        </p>
+        <p>
+          Le respect du secret professionnel, enfin. Il est absolu et couvre
+          tout ce que vous me confiez, dès notre premier échange, même si vous
+          décidez finalement de ne pas me confier votre dossier.
+        </p>
+      </div>
+
+      <aside class="colonne-parcours" aria-labelledby="t-parcours">
+        <h2 class="parcours-titre" id="t-parcours">Parcours</h2>
+        <dl class="parcours">
+          {
+            parcours.map((p) => (
+              <div class="parcours-ligne">
+                <dt>{p.date}</dt>
+                <dd>{p.texte}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="fiche">
+          <h3 class="parcours-titre">Le cabinet</h3>
+          <p>
+            {cabinet.adresse.rue}<br />
+            {cabinet.adresse.codePostal} {cabinet.adresse.ville}<br />
+            <span class="fiche-note">{cabinet.accueil}</span>
+          </p>
+          <p>
+            <a class="fiche-tel" href={`tel:${cabinet.telephoneLien}`}>
+              {cabinet.telephone}
+            </a>
+          </p>
+          <p class="fiche-note">
+            Langue de travail : français.<br />
+            Aide juridictionnelle acceptée selon la situation.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <AppelAction
+    titre="Un premier rendez-vous"
+    texte="Il dure environ une heure. Venez avec les documents dont vous disposez — livret de famille, contrat de mariage, décisions déjà rendues, avis d’imposition. Si vous n’avez rien sous la main, venez quand même : nous verrons ensemble ce qu’il faut réunir."
+  />
+</Base>
+
+<style>
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+  }
+
+  .tete-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.5fr);
+    align-items: center;
+    gap: 2rem 3.5rem;
+    padding-block: clamp(2.75rem, 6vw, 4.5rem) 0;
+  }
+
+  .tete h1 {
+    color: var(--craie);
+  }
+
+  .tete-sous {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    letter-spacing: 0.06em;
+    color: rgba(239, 241, 236, 0.6);
+    margin: 0.7rem 0 1.4rem;
+  }
+
+  .tete-texte {
+    font-size: var(--t-1);
+    line-height: 1.7;
+    color: rgba(239, 241, 236, 0.86);
+    max-width: 31rem;
+    margin: 0;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .tete-portrait {
+    align-self: end;
+  }
+
+  /* Même dissolution des bords que sur l'accueil : la photo n'a pas de cadre. */
+  .tete-portrait :global(img) {
+    width: 100%;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 24%,
+        #000 76%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 32%, #000 100%);
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 24%,
+        #000 76%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 32%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  @media (max-width: 820px) {
+    .tete-grille {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .tete-portrait {
+      order: -1;
+      width: min(58%, 17rem);
+      margin-inline: auto -0.5rem;
+      margin-bottom: -1.5rem;
+    }
+
+    .tete-portrait :global(img) {
+      -webkit-mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          #000 22%,
+          #000 82%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 28%,
+          #000 74%,
+          transparent 99%
+        );
+      mask-image: linear-gradient(
+          to right,
+          transparent 0%,
+          #000 22%,
+          #000 82%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 28%,
+          #000 74%,
+          transparent 99%
+        );
+    }
+
+    .tete-texte {
+      padding-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    }
+  }
+
+  /* ------------------------------------------------------------------ */
+
+  .deux-colonnes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+    gap: 3rem 4.5rem;
+    align-items: start;
+  }
+
+  .colonne-texte {
+    max-width: var(--mesure-large);
+    font-size: 1.09rem;
+    line-height: 1.76;
+  }
+
+  .colonne-texte h2 {
+    margin-bottom: 1rem;
+  }
+
+  .colonne-texte h2 + p {
+    margin-top: 0;
+  }
+
+  .colonne-texte h2:not(:first-child) {
+    margin-top: 2.75rem;
+  }
+
+  .parcours-titre {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--grafite);
+    margin: 0 0 1rem;
+  }
+
+  .parcours {
+    margin: 0;
+    border-top: 2px solid var(--encre);
+  }
+
+  .parcours-ligne {
+    padding-block: 0.95rem;
+    border-bottom: var(--rule);
+  }
+
+  .parcours dt {
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.2rem;
+  }
+
+  .parcours dd {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--grafite);
+  }
+
+  .fiche {
+    margin-top: 2.5rem;
+    background: var(--papier);
+    border-top: 2px solid var(--encre);
+    padding: 1.4rem 1.5rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.66;
+  }
+
+  .fiche p {
+    margin-bottom: 0.9rem;
+  }
+
+  .fiche p:last-child {
+    margin-bottom: 0;
+  }
+
+  .fiche-note {
+    font-size: 0.92rem;
+    color: var(--grafite);
+  }
+
+  .fiche-tel {
+    font-family: var(--sans);
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--encre);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bordeaux);
+  }
+
+  @media (max-width: 900px) {
+    .deux-colonnes {
+      grid-template-columns: 1fr;
+    }
+
+    .colonne-parcours {
+      max-width: var(--mesure-large);
+    }
+  }
+
+</style>

@@ -1,0 +1,623 @@
+---
+import Base from '../layouts/Base.astro';
+import { cabinet, FORMULAIRE_ENDPOINT, domaines } from '../data/cabinet';
+
+const description =
+  'Contacter Maître Élodie Dutour, avocat au barreau de Paris — 92 boulevard de Sébastopol, 75003 Paris. Téléphone 01 81 80 04 27. Sur rendez-vous uniquement.';
+
+const { adresse, metro } = cabinet;
+const itineraire = `https://www.openstreetmap.org/directions?to=${adresse.latitude}%2C${adresse.longitude}`;
+const planLien = `https://www.openstreetmap.org/?mlat=${adresse.latitude}&mlon=${adresse.longitude}#map=17/${adresse.latitude}/${adresse.longitude}`;
+---
+
+<Base titre="Contact" description={description}>
+  <section class="tete">
+    <div class="enveloppe">
+      <h1 class="titre-page">Me contacter</h1>
+      <p class="tete-texte">
+        Le plus simple reste le téléphone : nous voyons en quelques minutes si
+        je suis le bon interlocuteur pour votre situation, et nous fixons un
+        rendez-vous.
+      </p>
+      <div class="tete-actions">
+        <a class="tete-tel" href={`tel:${cabinet.telephoneLien}`}>
+          {cabinet.telephone}
+        </a>
+        <a class="tete-courriel" href={`mailto:${cabinet.courriel}`}>
+          {cabinet.courriel}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe contact-grille">
+      <!-- ============================================== formulaire ==== -->
+      <div class="formulaire-zone">
+        <h2 class="titre-section">Écrire au cabinet</h2>
+        <p class="formulaire-intro">
+          Décrivez votre situation en quelques lignes. Je vous réponds sous
+          deux jours ouvrés.
+        </p>
+
+        <div class="garde" role="note">
+          <p>
+            <strong>Ne transmettez pas d’éléments confidentiels par ce
+            formulaire.</strong> Indiquez seulement la nature de votre
+            situation et vos coordonnées. Les détails de votre dossier se
+            discutent par téléphone ou au cabinet, où le secret professionnel
+            s’applique pleinement.
+          </p>
+        </div>
+
+        <form
+          class="formulaire"
+          method="POST"
+          action={FORMULAIRE_ENDPOINT || undefined}
+          data-formulaire
+          data-courriel={cabinet.courriel}
+          novalidate
+        >
+          {
+            FORMULAIRE_ENDPOINT && (
+              <>
+                <input
+                  type="hidden"
+                  name="subject"
+                  value="Demande depuis dutour-avocat.fr"
+                />
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  class="invisible"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </>
+            )
+          }
+
+          <div class="champ">
+            <label for="nom">Nom et prénom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="champ-paire">
+            <div class="champ">
+              <label for="courriel">Courriel</label>
+              <input
+                type="email"
+                id="courriel"
+                name="courriel"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="champ">
+              <label for="telephone">
+                Téléphone <span class="champ-option">(recommandé)</span>
+              </label>
+              <input
+                type="tel"
+                id="telephone"
+                name="telephone"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <div class="champ">
+            <label for="sujet">Votre situation concerne</label>
+            <select id="sujet" name="sujet" required>
+              <option value="">Choisissez un domaine</option>
+              {domaines.map((d) => <option value={d.court}>{d.court}</option>)}
+              <option value="Autre / je ne sais pas">
+                Autre, ou je ne sais pas
+              </option>
+            </select>
+          </div>
+
+          <div class="champ">
+            <label for="message">Votre message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+            <p class="champ-aide">
+              Quelques lignes suffisent : ce dont il s’agit, et si une échéance
+              approche (audience, convocation, délai de recours).
+            </p>
+          </div>
+
+          <div class="champ-accord">
+            <input type="checkbox" id="accord" name="accord" required />
+            <label for="accord">
+              J’accepte que les informations saisies soient utilisées pour
+              répondre à ma demande, dans les conditions décrites dans la{' '}
+              <a href="/politique-de-confidentialite"
+                >politique de confidentialité</a
+              >.
+            </label>
+          </div>
+
+          <button class="bouton" type="submit">Envoyer ma demande</button>
+
+          <p class="formulaire-etat" data-etat role="status" aria-live="polite">
+          </p>
+        </form>
+      </div>
+
+      <!-- =================================================== accès ==== -->
+      <aside class="acces">
+        <div class="bloc-acces">
+          <h2 class="acces-titre">Adresse</h2>
+          <address>
+            {adresse.rue}<br />
+            {adresse.codePostal} {adresse.ville}
+          </address>
+          <p class="acces-note">{cabinet.accueil}.</p>
+          <p>
+            <a class="acces-lien" href={itineraire} rel="noopener noreferrer">
+              Calculer mon itinéraire
+            </a>
+          </p>
+        </div>
+
+        <div class="bloc-acces">
+          <h2 class="acces-titre">Métro</h2>
+          <ul class="metro">
+            {
+              metro.map((m) => (
+                <li>
+                  <span class="metro-station">{m.station}</span>
+                  <span class="metro-lignes">lignes {m.lignes}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="bloc-acces">
+          <h2 class="acces-titre">Téléphone et courriel</h2>
+          <p>
+            <a class="acces-tel" href={`tel:${cabinet.telephoneLien}`}>
+              {cabinet.telephone}
+            </a><br />
+            <a href={`mailto:${cabinet.courriel}`}>{cabinet.courriel}</a><br />
+            <span class="acces-note">Fax {cabinet.fax}</span>
+          </p>
+        </div>
+
+        <div class="bloc-acces">
+          <h2 class="acces-titre">Urgence</h2>
+          <p class="acces-note">
+            En cas de garde à vue, faites-moi désigner directement par les
+            enquêteurs, ou faites-moi appeler par un proche au
+            {' '}<a href={`tel:${cabinet.telephoneLien}`}>{cabinet.telephone}</a>.
+          </p>
+        </div>
+
+        <p class="plan-lien">
+          <a href={planLien} rel="noopener noreferrer">
+            Voir le plan du quartier
+          </a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+    padding-block: clamp(2.75rem, 6vw, 4.25rem);
+  }
+
+  .tete h1 {
+    color: var(--craie);
+    margin-bottom: 1.1rem;
+  }
+
+  .tete-texte {
+    font-size: var(--t-2);
+    font-weight: 300;
+    line-height: 1.58;
+    color: rgba(239, 241, 236, 0.84);
+    max-width: 34rem;
+  }
+
+  .tete-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 2rem;
+    margin-top: 1.75rem;
+  }
+
+  .tete-tel {
+    font-family: var(--sans);
+    font-size: 1.85rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--craie);
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+  .tete-tel:hover {
+    color: #fff;
+  }
+
+  .tete-courriel {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: rgba(239, 241, 236, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(239, 241, 236, 0.4);
+  }
+
+  .tete-courriel:hover {
+    color: var(--craie);
+  }
+
+  /* ----------------------------------------------------------- grille */
+
+  .contact-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+    gap: 3rem 4.5rem;
+    align-items: start;
+  }
+
+  .formulaire-zone {
+    max-width: 40rem;
+  }
+
+  .formulaire-intro {
+    font-size: var(--t-1);
+    color: var(--grafite);
+    margin: 0.9rem 0 1.6rem;
+  }
+
+  .garde {
+    border-left: 2px solid var(--bordeaux);
+    background: var(--papier);
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .garde p {
+    margin: 0;
+    font-size: 0.99rem;
+    line-height: 1.66;
+    color: var(--grafite);
+  }
+
+  .garde strong {
+    color: var(--encre);
+    font-weight: 600;
+  }
+
+  /* -------------------------------------------------------- champs */
+
+  .champ {
+    margin-bottom: 1.4rem;
+  }
+
+  .champ-paire {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.87rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.45rem;
+    color: var(--encre);
+  }
+
+  .champ-option {
+    font-weight: 400;
+    color: var(--grafite);
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  select,
+  textarea {
+    width: 100%;
+    font-family: var(--serif);
+    font-size: 1.04rem;
+    line-height: 1.5;
+    color: var(--encre);
+    background: var(--papier);
+    border: 1px solid rgba(20, 32, 40, 0.24);
+    border-radius: 2px;
+    padding: 0.72rem 0.85rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  select {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #556465 50%),
+      linear-gradient(135deg, #556465 50%, transparent 50%);
+    background-position: calc(100% - 18px) calc(50% + 1px),
+      calc(100% - 13px) calc(50% + 1px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.5rem;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--encre);
+    box-shadow: 0 0 0 3px rgba(123, 45, 62, 0.14);
+  }
+
+  input:user-invalid,
+  select:user-invalid,
+  textarea:user-invalid {
+    border-color: var(--bordeaux);
+  }
+
+  .champ-aide {
+    font-family: var(--sans);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: var(--grafite);
+    margin: 0.5rem 0 0;
+  }
+
+  .champ-accord {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 1.75rem 0;
+  }
+
+  .champ-accord input {
+    flex: 0 0 auto;
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-top: 0.25rem;
+    accent-color: var(--bordeaux);
+  }
+
+  .champ-accord label {
+    font-family: var(--serif);
+    font-size: 0.97rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--grafite);
+    margin: 0;
+  }
+
+  .formulaire-etat {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 1.1rem 0 0;
+    padding-left: 0.9rem;
+    border-left: 2px solid transparent;
+  }
+
+  .formulaire-etat:empty {
+    display: none;
+  }
+
+  .formulaire-etat[data-ton='ok'] {
+    border-left-color: #2f6b4f;
+    color: #2f6b4f;
+  }
+
+  .formulaire-etat[data-ton='erreur'] {
+    border-left-color: var(--bordeaux);
+    color: var(--bordeaux);
+  }
+
+  @media (max-width: 560px) {
+    .champ-paire {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  /* ---------------------------------------------------------- accès */
+
+  .acces {
+    background: var(--papier);
+    border-top: 2px solid var(--encre);
+    padding: 1.5rem 1.6rem 1.75rem;
+    font-size: 1rem;
+    line-height: 1.66;
+  }
+
+  .bloc-acces + .bloc-acces {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: var(--rule);
+  }
+
+  .acces-titre {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--grafite);
+    margin: 0 0 0.65rem;
+  }
+
+  .acces address {
+    font-style: normal;
+    margin-bottom: 0.4rem;
+  }
+
+  .acces p {
+    margin-bottom: 0.5rem;
+  }
+
+  .acces p:last-child {
+    margin-bottom: 0;
+  }
+
+  .acces-note {
+    font-size: 0.94rem;
+    color: var(--grafite);
+  }
+
+  .acces-tel {
+    font-family: var(--sans);
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--encre);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bordeaux);
+  }
+
+  .acces-lien {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .metro {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .metro li + li {
+    margin-top: 0.5rem;
+  }
+
+  .metro-station {
+    display: block;
+    font-size: 1rem;
+  }
+
+  .metro-lignes {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    color: var(--grafite);
+  }
+
+  .plan-lien {
+    margin: 1.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: var(--rule);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grille {
+      grid-template-columns: 1fr;
+    }
+
+    .acces {
+      max-width: 40rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-formulaire]');
+  const etat = form?.querySelector<HTMLParagraphElement>('[data-etat]');
+
+  const dire = (texte: string, ton: 'ok' | 'erreur') => {
+    if (!etat) return;
+    etat.textContent = texte;
+    etat.dataset.ton = ton;
+  };
+
+  form?.addEventListener('submit', async (evenement) => {
+    if (!form.checkValidity()) {
+      evenement.preventDefault();
+      form.reportValidity();
+      dire('Certains champs doivent encore être complétés.', 'erreur');
+      return;
+    }
+
+    const donnees = new FormData(form);
+
+    // Sans service configuré, on bascule sur un courriel pré-rempli :
+    // aucune donnée ne transite par un tiers.
+    if (!form.action) {
+      evenement.preventDefault();
+      const destinataire = form.dataset.courriel ?? '';
+      const corps = [
+        `Nom : ${donnees.get('nom')}`,
+        `Courriel : ${donnees.get('courriel')}`,
+        `Téléphone : ${donnees.get('telephone') || '—'}`,
+        `Domaine : ${donnees.get('sujet')}`,
+        '',
+        String(donnees.get('message') ?? ''),
+      ].join('\n');
+
+      window.location.href =
+        `mailto:${destinataire}` +
+        `?subject=${encodeURIComponent('Demande depuis dutour-avocat.fr')}` +
+        `&body=${encodeURIComponent(corps)}`;
+
+      dire(
+        'Votre logiciel de messagerie s’ouvre avec le message pré-rempli. Il ne reste qu’à l’envoyer.',
+        'ok',
+      );
+      return;
+    }
+
+    evenement.preventDefault();
+    const bouton = form.querySelector<HTMLButtonElement>('button[type=submit]');
+    const libelle = bouton?.textContent ?? '';
+    if (bouton) {
+      bouton.disabled = true;
+      bouton.textContent = 'Envoi en cours…';
+    }
+
+    try {
+      const reponse = await fetch(form.action, {
+        method: 'POST',
+        body: donnees,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!reponse.ok) throw new Error(String(reponse.status));
+
+      form.reset();
+      dire(
+        'Votre message est parti. Je vous réponds sous deux jours ouvrés. Si votre situation est urgente, appelez-moi au 01 81 80 04 27.',
+        'ok',
+      );
+    } catch {
+      dire(
+        'L’envoi a échoué. Écrivez-moi directement à e.dutour@dutour-avocat.fr ou appelez le 01 81 80 04 27.',
+        'erreur',
+      );
+    } finally {
+      if (bouton) {
+        bouton.disabled = false;
+        bouton.textContent = libelle;
+      }
+    }
+  });
+</script>

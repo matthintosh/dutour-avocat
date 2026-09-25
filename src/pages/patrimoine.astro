@@ -1,0 +1,126 @@
+---
+import DomaineLayout from '../layouts/Domaine.astro';
+import { getDomaine } from '../data/cabinet';
+
+const domaine = getDomaine('patrimoine');
+
+const description =
+  'Avocat en droit patrimonial de la famille à Paris : liquidation du régime matrimonial, partage des biens indivis, changement de régime matrimonial, convention de PACS. Maître Élodie Dutour.';
+
+const etapes = [
+  {
+    titre: 'L’inventaire',
+    texte:
+      'Nous recensons l’actif et le passif : biens immobiliers, comptes, épargne salariale, parts de société, crédits en cours, donations reçues. Rien ne doit rester hors du tableau.',
+  },
+  {
+    titre: 'La qualification',
+    texte:
+      'Chaque bien est classé — commun, propre, indivis — selon votre régime matrimonial et son origine. C’est l’étape technique qui détermine ce qui se partage réellement.',
+  },
+  {
+    titre: 'Les comptes entre vous',
+    texte:
+      'Récompenses dues à la communauté, créances entre époux, remboursements d’emprunt effectués par un seul : ces comptes corrigent le partage et sont souvent oubliés.',
+  },
+  {
+    titre: 'Le partage amiable',
+    texte:
+      'Si un accord se dessine, il est formalisé par un acte de partage, notarié lorsqu’un bien immobilier est en jeu. C’est la voie la plus rapide et la moins coûteuse.',
+  },
+  {
+    titre: 'Le partage judiciaire',
+    texte:
+      'À défaut d’accord, le tribunal est saisi et désigne un notaire pour conduire les opérations. La procédure est plus longue : raison de plus pour tenter sérieusement l’accord d’abord.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Qu’est-ce que la liquidation du régime matrimonial ?',
+    reponse:
+      'C’est l’opération qui met fin au régime patrimonial du couple : on établit ce que chacun possède en propre, ce qui est commun, ce que l’un doit à l’autre, puis on partage. Elle est distincte du divorce lui-même et peut se poursuivre après que le divorce a été prononcé.',
+  },
+  {
+    question: 'Nous avons acheté un bien ensemble sans être mariés. Que devient-il ?',
+    reponse:
+      'Le bien est détenu en indivision, chacun à hauteur de la quote-part indiquée dans l’acte d’achat — qui ne correspond pas toujours à ce que chacun a effectivement financé. Nul n’étant contraint de rester en indivision, chacun peut en demander le partage : rachat par l’un, vente amiable, ou vente judiciaire à défaut d’accord.',
+  },
+  {
+    question: 'Peut-on changer de régime matrimonial ?',
+    reponse:
+      'Oui, par acte notarié, à condition que le changement serve l’intérêt de la famille. Les enfants majeurs et les créanciers sont informés et peuvent s’y opposer. L’homologation par le juge n’est requise que dans certains cas, notamment en présence d’enfants mineurs.',
+  },
+  {
+    question: 'Qu’est-ce qu’une récompense ?',
+    reponse:
+      'Lorsque la communauté s’est enrichie aux dépens du patrimoine propre d’un époux — ou l’inverse — un compte doit être établi entre eux. Exemple courant : un appartement acheté pendant le mariage avec un héritage reçu par un seul des époux. Ces récompenses se chiffrent selon des règles précises et modifient sensiblement le partage.',
+  },
+  {
+    question: 'À quoi sert une convention de PACS ou de concubinage ?',
+    reponse:
+      'À écrire à l’avance ce qui, sans elle, se réglera dans le conflit : qui possède quoi, comment sont réparties les dépenses du foyer, ce qu’il advient du logement en cas de rupture. C’est un document court, peu coûteux, qui évite des années de discussion.',
+  },
+];
+---
+
+<DomaineLayout
+  domaine={domaine}
+  description={description}
+  etapes={etapes}
+  etapesIntro="Le partage d’un patrimoine suit une méthode. La respecter, dans l’ordre, évite les erreurs coûteuses."
+  faq={faq}
+>
+  <h2>Séparer ce qui a été construit ensemble</h2>
+
+  <p>
+    La question patrimoniale est souvent la dernière traitée et la plus longue à
+    résoudre. Elle est aussi celle qui engage le plus durablement votre avenir :
+    un partage mal établi se paie pendant des années.
+  </p>
+
+  <p>
+    Mon rôle est de reconstituer précisément la situation, de chiffrer ce à quoi
+    vous avez droit, et de défendre cette position — que le partage se fasse à
+    l’amiable ou devant le tribunal.
+  </p>
+
+  <h2>Le régime matrimonial commande tout</h2>
+
+  <p>
+    Faute de contrat de mariage, vous êtes soumis au régime légal de la
+    communauté réduite aux acquêts : les biens acquis pendant le mariage sont
+    communs, ceux possédés avant ou reçus par donation ou succession restent
+    propres. Un contrat peut avoir prévu autre chose — séparation de biens,
+    participation aux acquêts, communauté universelle. Le régime applicable
+    détermine ce qui entre dans le partage.
+  </p>
+
+  <div class="avis">
+    <p>
+      Un changement de régime matrimonial peut anticiper une difficulté plutôt
+      que de la subir : protéger le conjoint d’un entrepreneur, rééquilibrer un
+      patrimoine, préparer une transmission. Il se décide à froid, pas dans
+      l’urgence d’un conflit.
+    </p>
+  </div>
+
+  <h2>L’indivision, et comment en sortir</h2>
+
+  <p>
+    Après une séparation, un bien acheté à deux reste détenu en indivision
+    jusqu’au partage. Chaque décision y exige l’accord de tous, ce qui devient
+    vite paralysant. La loi pose un principe simple : nul n’est contraint de
+    demeurer dans l’indivision. Le rachat de la part de l’autre, la vente
+    amiable ou, à défaut, la licitation permettent d’en sortir.
+  </p>
+
+  <h2>Écrire les choses à l’avance</h2>
+
+  <p>
+    Une convention de PACS ou de concubinage, un contrat de mariage adapté, une
+    clause de rachat bien rédigée : quelques pages écrites au bon moment évitent
+    des procédures longues et pénibles. C’est le conseil le moins coûteux que je
+    donne, et le plus rentable.
+  </p>
+</DomaineLayout>

@@ -1,0 +1,203 @@
+---
+import Base from '../layouts/Base.astro';
+import { cabinet } from '../data/cabinet';
+
+const description =
+  'Mentions légales du site dutour-avocat.fr — Cabinet de Maître Élodie Dutour, avocat au barreau de Paris.';
+---
+
+<Base titre="Mentions légales" description={description} noindex>
+  <section class="tete">
+    <div class="enveloppe">
+      <h1 class="titre-page">Mentions légales</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe legal">
+      <h2>Éditeur du site</h2>
+      <p>
+        <strong>Maître Élodie Dutour</strong><br />
+        Avocat au barreau de Paris<br />
+        {cabinet.adresse.rue}<br />
+        {cabinet.adresse.codePostal} {cabinet.adresse.ville} — France
+      </p>
+      <p>
+        Téléphone : {cabinet.telephone}<br />
+        Télécopie : {cabinet.fax}<br />
+        Courriel :
+        <a href={`mailto:${cabinet.courriel}`}>{cabinet.courriel}</a>
+      </p>
+      <p>
+        Entrepreneur individuel — SIRET : {cabinet.siret}<br />
+        Membre d’une association de gestion agréée<br />
+        TVA : régime applicable aux prestations d’avocat
+      </p>
+
+      <h2>Directeur de la publication</h2>
+      <p>Maître Élodie Dutour.</p>
+
+      <h2>Profession et règles applicables</h2>
+      <p>
+        Maître Élodie Dutour exerce la profession d’avocat, réglementée par la
+        loi n° 71-1130 du 31 décembre 1971 et le décret n° 91-1197 du 27
+        novembre 1991.
+      </p>
+      <p>
+        Elle est inscrite au <strong>barreau de Paris</strong> et soumise, à ce
+        titre, au Règlement Intérieur National de la profession d’avocat (RIN)
+        ainsi qu’au Règlement Intérieur du Barreau de Paris (RIBP).
+      </p>
+      <p>
+        Autorité de contrôle : Ordre des avocats de Paris — 11 place Dauphine,
+        75001 Paris.<br />
+        Les règles professionnelles sont consultables sur le site du
+        <a
+          href="https://www.cnb.avocat.fr"
+          rel="noopener noreferrer">Conseil national des barreaux</a
+        >.
+      </p>
+      <p>
+        Le titre d’avocat a été obtenu en France. La langue de travail du
+        cabinet est le français.
+      </p>
+
+      <h2>Assurance de responsabilité civile professionnelle</h2>
+      <div class="a-completer">
+        <p>
+          <strong>À compléter avant mise en ligne.</strong> Renseigner ici le
+          nom et l’adresse de l’assureur au titre de la responsabilité civile
+          professionnelle, le numéro de police, ainsi que la couverture
+          géographique du contrat — ces informations sont obligatoires
+          (article 19 de la loi du 21 juin 2004 pour la confiance dans
+          l’économie numérique, et RIN).
+        </p>
+        <p class="a-completer-note">
+          Pour les avocats du barreau de Paris, l’assurance est en principe
+          souscrite collectivement par l’Ordre : les références exactes figurent
+          sur l’attestation annuelle communiquée par le barreau.
+        </p>
+      </div>
+
+      <h2>Médiation de la consommation</h2>
+      <p>
+        Conformément aux articles L. 612-1 et suivants du code de la
+        consommation, tout client consommateur peut recourir gratuitement au
+        médiateur de la consommation de la profession d’avocat en vue de la
+        résolution amiable d’un litige relatif aux honoraires.
+      </p>
+      <p>
+        <strong>Médiateur de la consommation de la profession d’avocat</strong
+        ><br />
+        180 boulevard Haussmann, 75008 Paris<br />
+        <a
+          href="https://mediateur-consommation-avocat.fr"
+          rel="noopener noreferrer">mediateur-consommation-avocat.fr</a
+        >
+      </p>
+      <p>
+        Toute contestation en matière d’honoraires relève par ailleurs de la
+        procédure prévue à l’article 174 du décret du 27 novembre 1991, devant
+        le Bâtonnier de l’Ordre des avocats de Paris.
+      </p>
+
+      <h2>Hébergement</h2>
+      <p>
+        Le site est hébergé par <strong>Google Ireland Limited</strong>
+        (Firebase Hosting)<br />
+        Gordon House, Barrow Street, Dublin 4, Irlande
+      </p>
+      <div class="a-completer">
+        <p>
+          <strong>À vérifier :</strong> confirmer l’entité et l’adresse de
+          l’hébergeur effectivement utilisé au moment de la mise en ligne, et
+          corriger ce paragraphe le cas échéant.
+        </p>
+      </div>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        Le site internet dutour-avocat.fr relève du principe de la protection du
+        droit d’auteur, posé par l’article L. 111-1 du code de la propriété
+        intellectuelle. Il est la propriété exclusive d’Élodie Dutour.
+      </p>
+      <p>
+        La totalité de son contenu est donc protégée. Aucune copie,
+        reproduction, diffusion, modification ou transmission — par
+        téléchargement, courriel ou tout autre support de communication —, même
+        partielle, autre que celle prévue à l’article L. 122-5 du code de la
+        propriété intellectuelle, ne peut être faite sans l’autorisation
+        expresse d’Élodie Dutour.
+      </p>
+
+      <h2>Données personnelles</h2>
+      <p>
+        Le traitement des données collectées par ce site est décrit dans la
+        <a href="/politique-de-confidentialite"
+          >politique de confidentialité</a
+        >.
+      </p>
+
+      <h2>Crédits</h2>
+      <p class="mention">
+        Conception et développement du site : 2026. Photographies : cabinet
+        Élodie Dutour. Caractères typographiques : Spectral (Production Type) et
+        Archivo (Omnibus-Type), distribués sous licence SIL Open Font License et
+        servis depuis ce site, sans requête vers un service tiers.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+    padding-block: clamp(2.5rem, 5vw, 3.75rem);
+  }
+
+  .tete h1 {
+    color: var(--craie);
+  }
+
+  .legal {
+    max-width: var(--mesure-large);
+    font-size: 1.05rem;
+    line-height: 1.74;
+  }
+
+  .legal h2 {
+    font-size: var(--t-2);
+    font-weight: 500;
+    margin: 2.5rem 0 0.8rem;
+    padding-top: 1.25rem;
+    border-top: var(--rule);
+  }
+
+  .legal h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .a-completer {
+    background: rgba(123, 45, 62, 0.06);
+    border-left: 2px solid var(--bordeaux);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    font-size: 0.99rem;
+  }
+
+  .a-completer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .a-completer strong {
+    color: var(--bordeaux);
+  }
+
+  .a-completer-note {
+    color: var(--grafite);
+    font-size: 0.95rem;
+  }
+</style>

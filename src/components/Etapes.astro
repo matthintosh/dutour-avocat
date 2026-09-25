@@ -1,0 +1,91 @@
+---
+interface Props {
+  titre?: string;
+  intro?: string;
+  /** Une véritable séquence : c'est ce qui justifie la numérotation. */
+  etapes: { titre: string; texte: string }[];
+}
+
+const {
+  titre = 'Comment ça se passe',
+  intro,
+  etapes,
+} = Astro.props;
+---
+
+<section class="section etapes-section" aria-labelledby="t-etapes">
+  <div class="enveloppe">
+    <h2 class="titre-section" id="t-etapes">{titre}</h2>
+    {intro && <p class="chapeau mesure-large etapes-intro">{intro}</p>}
+
+    <ol class="etapes">
+      {
+        etapes.map((e) => (
+          <li class="etape">
+            <h3 class="etape-titre">{e.titre}</h3>
+            <p class="etape-texte">{e.texte}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .etapes-intro {
+    margin-top: 1rem;
+  }
+
+  /* Une séquence se lit de haut en bas : une colonne, pas une grille. */
+  .etapes {
+    list-style: none;
+    counter-reset: etape;
+    margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+    padding: 0;
+    max-width: 52rem;
+    border-top: var(--rule);
+  }
+
+  .etape {
+    counter-increment: etape;
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 0 1.5rem;
+    padding-block: 1.4rem;
+    border-bottom: var(--rule);
+  }
+
+  .etape::before {
+    content: counter(etape, decimal-leading-zero);
+    grid-row: 1 / span 2;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.06em;
+    color: var(--bordeaux);
+    padding-top: 0.28rem;
+  }
+
+  .etape-titre {
+    font-size: var(--t-1);
+    font-weight: 600;
+    line-height: 1.38;
+    margin-bottom: 0.4rem;
+  }
+
+  .etape-texte {
+    margin: 0;
+    font-size: 1.03rem;
+    line-height: 1.7;
+    color: var(--grafite);
+    max-width: 44rem;
+  }
+
+  @media (max-width: 560px) {
+    .etape {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      gap: 0 1rem;
+    }
+  }
+</style>

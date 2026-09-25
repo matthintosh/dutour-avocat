@@ -1,0 +1,324 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import AppelAction from '../components/AppelAction.astro';
+import { cabinet } from '../data/cabinet';
+
+const description =
+  'Honoraires du cabinet de Maître Élodie Dutour, avocat à Paris : première consultation 240 € TTC, convention d’honoraires systématique, forfait ou temps passé, aide juridictionnelle acceptée.';
+
+const criteres = [
+  'La nature et la difficulté du dossier',
+  'Le temps devant lui être consacré',
+  'Le travail de recherche',
+  'La ou les procédure(s) envisagée(s)',
+  'La situation personnelle du client',
+];
+
+const faq = [
+  {
+    question: 'Combien coûte la première consultation ?',
+    reponse: `La première consultation au cabinet est facturée ${cabinet.premiereConsultation}. Elle dure environ une heure et vous repartez avec une analyse de votre situation et les options qui s’offrent à vous, que vous décidiez ou non de me confier le dossier ensuite.`,
+  },
+  {
+    question: 'Qu’est-ce qu’une convention d’honoraires ?',
+    reponse:
+      'C’est le contrat écrit qui fixe, avant tout travail, le montant de mes honoraires et leurs modalités de règlement. Elle est obligatoire et signée entre l’avocat et son client. Elle vous protège : rien ne peut vous être facturé qui n’y ait été prévu.',
+  },
+  {
+    question: 'Forfait ou temps passé : comment se fait le choix ?',
+    reponse:
+      'Le forfait convient aux procédures dont le déroulement est prévisible — un divorce par consentement mutuel, par exemple — parce qu’il vous donne un montant connu d’avance. Le temps passé convient aux dossiers dont on ne peut pas anticiper l’ampleur, en particulier les procédures très conflictuelles. Nous en décidons ensemble au premier rendez-vous.',
+  },
+  {
+    question: 'Qu’est-ce qu’un honoraire de résultat ?',
+    reponse:
+      'C’est un complément d’honoraires calculé en pourcentage de ce que la procédure vous rapporte effectivement. Il ne peut jamais constituer la totalité de la rémunération de l’avocat, et son pourcentage est défini à l’avance dans la convention d’honoraires.',
+  },
+  {
+    question: 'Puis-je bénéficier de l’aide juridictionnelle ?',
+    reponse:
+      'L’aide juridictionnelle est acceptée par le cabinet selon votre situation. Elle est accordée sous conditions de ressources, de patrimoine et de nature du litige, et peut être totale ou partielle. Signalez-le dès le premier appel : cela change la manière dont nous organisons le dossier.',
+  },
+  {
+    question: 'Ma protection juridique peut-elle prendre en charge les frais ?',
+    reponse:
+      'Vérifiez vos contrats d’assurance habitation, automobile et votre carte bancaire : beaucoup incluent une garantie de protection juridique sans que leurs souscripteurs le sachent. Elle prend alors en charge tout ou partie des honoraires, dans la limite d’un plafond. Vous restez libre du choix de votre avocat, quoi que puisse suggérer votre assureur.',
+  },
+  {
+    question: 'Qui paie les frais de la procédure ?',
+    reponse:
+      'Les honoraires d’avocat se distinguent des frais de procédure — droits, frais d’huissier, d’expertise ou de notaire — qui s’ajoutent et vous sont refacturés à l’euro près. Le juge peut par ailleurs condamner la partie adverse à vous verser une somme au titre de l’article 700 du code de procédure civile, mais celle-ci couvre rarement l’intégralité de ce que vous avez engagé.',
+  },
+];
+---
+
+<Base titre="Honoraires" description={description} faq={faq}>
+  <section class="tete">
+    <div class="enveloppe">
+      <h1 class="titre-page">Honoraires</h1>
+      <p class="tete-texte">
+        Vous devez savoir ce que votre dossier va coûter avant qu’il commence.
+        Les honoraires sont fixés au premier rendez-vous et écrits dans une
+        convention que nous signons tous les deux.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe chiffres-grille">
+      <div class="chiffre">
+        <p class="chiffre-valeur">{cabinet.premiereConsultation}</p>
+        <p class="chiffre-libelle">Première consultation au cabinet</p>
+        <p class="chiffre-note">
+          Environ une heure. Analyse de votre situation et des options
+          possibles, sans engagement pour la suite.
+        </p>
+      </div>
+      <div class="chiffre">
+        <p class="chiffre-valeur">Convention écrite</p>
+        <p class="chiffre-libelle">Systématique, avant tout travail</p>
+        <p class="chiffre-note">
+          Elle fixe le montant, le mode de calcul et les échéances de règlement.
+          Rien ne vous est facturé qui n’y figure.
+        </p>
+      </div>
+      <div class="chiffre">
+        <p class="chiffre-valeur">Aide juridictionnelle</p>
+        <p class="chiffre-libelle">Acceptée selon votre situation</p>
+        <p class="chiffre-note">
+          Sous conditions de ressources. Signalez-le dès le premier appel.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-encre">
+    <div class="enveloppe criteres-grille">
+      <div>
+        <h2 class="titre-section">Comment le montant est déterminé</h2>
+        <p class="criteres-texte">
+          Conformément aux règles déontologiques de la profession, les
+          honoraires du cabinet sont déterminés selon plusieurs critères. Aucun
+          barème ne s’applique automatiquement : deux divorces n’ont ni la même
+          difficulté ni la même ampleur.
+        </p>
+      </div>
+      <ul class="criteres">
+        {criteres.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe">
+      <h2 class="titre-section mesure">Les modes de facturation</h2>
+
+      <div class="modes">
+        <article class="mode">
+          <h3>Le forfait</h3>
+          <p>
+            Un montant global fixé à l’avance pour une procédure dont le
+            déroulement est prévisible. Vous connaissez le coût total dès le
+            départ, quel que soit le temps que le dossier me prend
+            effectivement.
+          </p>
+          <p class="mode-note">
+            Adapté au divorce par consentement mutuel, aux conventions de PACS,
+            aux consultations et rédactions d’actes.
+          </p>
+        </article>
+
+        <article class="mode">
+          <h3>Le temps passé</h3>
+          <p>
+            La facturation s’effectue sur la base du taux horaire pratiqué par
+            le cabinet, appliqué au temps réellement consacré au dossier. Un
+            relevé détaillé vous est communiqué.
+          </p>
+          <p class="mode-note">
+            Adapté aux procédures contentieuses dont l’ampleur ne peut pas être
+            anticipée au départ.
+          </p>
+        </article>
+
+        <article class="mode">
+          <h3>L’honoraire de résultat</h3>
+          <p>
+            Le cas échéant, ces modalités pourront être assorties d’un honoraire
+            de résultat, dont le pourcentage est défini à l’avance. Il vient
+            s’ajouter à l’honoraire de base et ne peut jamais le remplacer
+            entièrement.
+          </p>
+          <p class="mode-note">
+            Pertinent lorsque l’enjeu du dossier est chiffrable : partage,
+            prestation compensatoire, indemnisation d’un préjudice.
+          </p>
+        </article>
+      </div>
+
+      <div class="precision mesure-large">
+        <p>
+          Les modalités de facturation sont établies en concertation avec vous,
+          et mon intervention fait toujours l’objet d’une convention
+          d’honoraires signée entre l’avocat et son client.
+        </p>
+        <p>
+          Aux honoraires s’ajoutent les frais et débours engagés pour votre
+          compte — frais d’huissier, d’expertise, de greffe, de notaire — qui
+          vous sont refacturés au réel, sur justificatifs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq questions={faq} titre="Questions sur les honoraires" />
+
+  <AppelAction
+    titre="Un devis avant de vous engager"
+    texte="Appelez-moi ou écrivez-moi en décrivant brièvement votre situation. Je vous indique le mode de facturation adapté et l’ordre de grandeur du coût, avant même le premier rendez-vous."
+  />
+</Base>
+
+<style>
+  .tete {
+    background: var(--encre);
+    color: var(--craie);
+    padding-block: clamp(2.75rem, 6vw, 4.25rem);
+  }
+
+  .tete h1 {
+    color: var(--craie);
+    margin-bottom: 1.1rem;
+  }
+
+  .tete-texte {
+    font-size: var(--t-2);
+    font-weight: 300;
+    line-height: 1.58;
+    color: rgba(239, 241, 236, 0.84);
+    max-width: 34rem;
+    margin: 0;
+  }
+
+  /* ---------------------------------------------------------- chiffres */
+
+  .chiffres-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2rem 3rem;
+  }
+
+  .chiffre {
+    border-top: 2px solid var(--encre);
+    padding-top: 1.1rem;
+  }
+
+  .chiffre-valeur {
+    font-size: var(--t-3);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 0.35rem;
+  }
+
+  .chiffre-libelle {
+    font-family: var(--sans);
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--bordeaux);
+    margin: 0 0 0.6rem;
+  }
+
+  .chiffre-note {
+    font-size: 0.99rem;
+    line-height: 1.64;
+    color: var(--grafite);
+    margin: 0;
+  }
+
+  /* ---------------------------------------------------------- critères */
+
+  .criteres-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2rem 4rem;
+    align-items: start;
+  }
+
+  .criteres-texte {
+    font-size: var(--t-1);
+    line-height: 1.72;
+    color: rgba(239, 241, 236, 0.84);
+    max-width: 30rem;
+    margin: 1rem 0 0;
+  }
+
+  .criteres {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: var(--rule-encre);
+  }
+
+  .criteres li {
+    font-size: 1.06rem;
+    line-height: 1.5;
+    padding-block: 0.95rem;
+    border-bottom: var(--rule-encre);
+    color: rgba(239, 241, 236, 0.9);
+  }
+
+  @media (max-width: 760px) {
+    .criteres-grille {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ------------------------------------------------------------- modes */
+
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2.25rem 3rem;
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .mode {
+    border-top: 1px solid var(--craie-ombre);
+    padding-top: 1.1rem;
+  }
+
+  .mode h3 {
+    font-size: var(--t-2);
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+
+  .mode p {
+    font-size: 1.03rem;
+    line-height: 1.7;
+  }
+
+  .mode-note {
+    color: var(--grafite);
+    font-size: 0.96rem !important;
+    border-left: 2px solid var(--bordeaux);
+    padding-left: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  .precision {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: 1.5rem;
+    border-top: var(--rule);
+    color: var(--grafite);
+    font-size: 1.02rem;
+    line-height: 1.72;
+  }
+
+  .precision p:last-child {
+    margin-bottom: 0;
+  }
+</style>

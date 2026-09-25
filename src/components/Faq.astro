@@ -1,0 +1,139 @@
+---
+interface Props {
+  titre?: string;
+  questions: { question: string; reponse: string }[];
+}
+
+const { titre = 'Questions fréquentes', questions } = Astro.props;
+---
+
+<section class="section faq" aria-labelledby="t-faq">
+  <div class="enveloppe">
+    <h2 class="titre-section" id="t-faq">{titre}</h2>
+
+    <div class="faq-liste">
+      {
+        questions.map((q) => (
+          <details class="faq-item">
+            <summary>
+              <span class="faq-question">{q.question}</span>
+              <span class="faq-signe" aria-hidden="true" />
+            </summary>
+            <div class="faq-reponse">
+              <p>{q.reponse}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <p class="faq-pied mention">
+      Ces réponses sont générales et ne remplacent pas un avis sur votre
+      dossier : le droit de la famille dépend étroitement des circonstances
+      de chaque situation.
+    </p>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--craie-ombre);
+  }
+
+  .faq-liste {
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    max-width: 52rem;
+    border-top: 1px solid rgba(20, 32, 40, 0.16);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(20, 32, 40, 0.16);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.15rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary:focus-visible {
+    outline: 2px solid var(--bordeaux);
+    outline-offset: -2px;
+  }
+
+  .faq-question {
+    font-size: var(--t-1);
+    font-weight: 500;
+    line-height: 1.42;
+    color: var(--encre);
+    transition: color 0.15s ease;
+  }
+
+  .faq-item summary:hover .faq-question {
+    color: var(--bordeaux);
+  }
+
+  /* Signe + / − dessiné en CSS, aligné sur le filet */
+  .faq-signe {
+    position: relative;
+    flex: 0 0 auto;
+    width: 13px;
+    height: 13px;
+    margin-top: 0.35rem;
+  }
+
+  .faq-signe::before,
+  .faq-signe::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 1.5px;
+    background: var(--encre);
+    transition: transform 0.22s ease;
+  }
+
+  .faq-signe::after {
+    transform: rotate(90deg);
+  }
+
+  .faq-item[open] .faq-signe::after {
+    transform: rotate(0deg);
+  }
+
+  .faq-reponse {
+    padding-bottom: 1.4rem;
+    max-width: 44rem;
+  }
+
+  .faq-reponse p {
+    margin: 0;
+    line-height: 1.72;
+    color: var(--grafite);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-item[open] .faq-reponse {
+      animation: deplie 0.26s ease;
+    }
+  }
+
+  @keyframes deplie {
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+  }
+
+  .faq-pied {
+    margin: clamp(1.75rem, 3vw, 2.25rem) 0 0;
+    max-width: 44rem;
+  }
+</style>
