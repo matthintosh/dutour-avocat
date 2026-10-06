@@ -12,10 +12,11 @@ interface Props {
 
 const { titre, description, noindex = false, faq } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(
-  /\/$/,
-  '',
-);
+// `build.format: 'file'` sort des URL en .html ; l'hébergement sert des URL
+// propres (/contact) et redirige /contact.html. La canonique vise la cible.
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+  .replace(/(?:index)?\.html$/, '')
+  .replace(/\/$/, '');
 const titreComplet =
   titre === 'accueil'
     ? `${cabinet.nom} — ${cabinet.titre}, droit de la famille`
